@@ -1,0 +1,38 @@
+@startuml
+
+object student1 {
+  - imię: "Jan Kowalski"
+  - motywacja: 70
+  - plan: Plan
+  - przedmioty: [Matematyka, Programowanie]
+}
+
+object subject1 {
+  - nazwa: "Matematyka dyskretna"
+  - trudność: 5
+  - wymagany czas: 20
+  - przerobiony czas: 12
+}
+object Plan{
+  - dni: 7
+  - rozkład: {1: {Matematyka: 2}, 2: {Programowanie: 3}, ...}
+}
+
+object StudyEvent {
+  - dzień: 1
+  - przedmiot: Matematyka
+  - godziny: 2
+}
+
+object SymulatorSesji {
+  - student: Jan Kowalski
+  - motywatory: [Przerwa, Rozpraszacz]
+}
+
+student1 --> Plan
+Plan --> subject1
+StudyEvent --> subject1
+student1 --> StudyEvent
+SymulatorSesji --> student1
+
+@enduml

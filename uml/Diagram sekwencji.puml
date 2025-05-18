@@ -1,0 +1,10 @@
+@startuml
+
+Student -> Plan : pobierzPlanNaDzień(dzień)
+Plan --> Student : lista godzin dla przedmiotów
+Student -> Przedmiot : uczSię(godziny)
+Student -> StudyEvent : zapiszWydarzenie()
+Student -> Motywator : zastosuj()
+Motywator --> Student : zmieńMotywację
+Student -> Visualizer : pokażPostęp()
+@enduml

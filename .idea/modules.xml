@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Sesja_Symulator.iml" filepath="$PROJECT_DIR$/Sesja_Symulator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/symulator/symulator.iml" filepath="$PROJECT_DIR$/symulator/symulator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/uml/uml.iml" filepath="$PROJECT_DIR$/uml/uml.iml" />
+    </modules>
+  </component>
+</project>

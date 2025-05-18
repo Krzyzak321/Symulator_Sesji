@@ -1,0 +1,97 @@
+@startuml
+interface Motywator {
+    + apply(student : Student) : void
+    + getName() : String
+}
+
+class Przerwa implements Motywator {
+    + apply(student : Student) : void
+    + getName() : String
+}
+
+class Rozpraszacz implements Motywator {
+    + apply(student : Student) : void
+    + getName() : String
+}
+
+class StudyEvent {
+    - subject : Przedmioty
+    - hours : int
+    - day : int
+    + getDescription() : String
+}
+
+class Wyniki {
+    - subject : Przedmioty
+    - score : int
+    - passed : boolean
+    + isPassed() : boolean
+    + getGrade() : String
+}
+
+class Przedmioty {
+    - name : String
+    - difficulty : int
+    - requiredTime : int
+    - studiedTime : int
+    - ects : int
+    + study(hours : int) : void
+    + isReady() : boolean
+    + getProgress() : double
+    + getScore() : int
+}
+
+class Student {
+    - name : String
+    - motivation : int
+    - plan : Plan
+    - subjects : List<Przedmioty>
+    - history : List<StudyEvent>
+    + study(day : int) : void
+    + takeExams() : List<Wyniki>
+    + getProgressReport() : String
+    + applyMotivator(m : Motywator) : void
+}
+
+class Plan {
+    - days : int
+    - schedule : Map<Integer, Map<Przedmioty, Integer>>
+    + generate(subjects : List<Przedmioty>, totalDays : int) : void
+    + getDailyPlan(day : int) : Map<Przedmioty, Integer>
+    + printPlan() : void
+}
+
+class SymulatorSesji {
+    - student : Student
+    - motivators : List<Motywator>
+    - random : Random
+    + run() : void
+    + applyMotivators() : void
+    + simulateDays() : void
+    + calculateResults() : List<Wyniki>
+}
+
+class Visualizer {
+    + drawStudyPlan(plan : Plan) : void
+    + drawProgress(subjects : List<Przedmioty>) : void
+    + drawResults(results : List<Wyniki>) : void
+    + showTimeline(events : List<StudyEvent>) : void
+}
+
+Motywator <|-- Przerwa
+Motywator <|-- Rozpraszacz
+Student --> Plan
+Student --> Przedmioty
+Student --> StudyEvent
+Wyniki --> Przedmioty
+StudyEvent --> Przedmioty
+Plan --> Przedmioty
+SymulatorSesji --> Student
+SymulatorSesji --> Motywator
+Visualizer --> Plan
+Visualizer --> Przedmioty
+Visualizer --> Wyniki
+Visualizer --> StudyEvent
+
+
+@enduml
