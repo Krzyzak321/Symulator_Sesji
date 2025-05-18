@@ -1,0 +1,11 @@
+@startuml
+
+[*] --> Przygotowanie
+Przygotowanie --> Nauka : plan
+Nauka --> MotywacjaSpada : motivation < threshold
+MotywacjaSpada --> Nauka : motivation recovered
+Nauka --> Egzamin : dzień egzaminu
+Egzamin --> Wyniki : wszystkie egzaminy ukończone
+Wyniki --> [*] : koniec
+
+@enduml
