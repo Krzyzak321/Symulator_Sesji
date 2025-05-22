@@ -12,6 +12,7 @@ object subject1 {
   - trudność: 5
   - wymagany czas: 20
   - przerobiony czas: 12
+  - predyspositons: 10
 }
 object Plan{
   - dni: 7

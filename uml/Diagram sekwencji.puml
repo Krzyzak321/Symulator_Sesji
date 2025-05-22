@@ -1,10 +1,29 @@
 @startuml
+actor User
+participant "Student" as S
+participant "Plan" as P
+participant "SubjectSorter" as SS
+participant "Subject" as Subj
+participant "StudyEvent" as SE
+participant "Motivator" as M
 
-Student -> Plan : pobierzPlanNaDzień(dzień)
-Plan --> Student : lista godzin dla przedmiotów
-Student -> Przedmiot : uczSię(godziny)
-Student -> StudyEvent : zapiszWydarzenie()
-Student -> Motywator : zastosuj()
-Motywator --> Student : zmieńMotywację
-Student -> Visualizer : pokażPostęp()
+User -> S : startStudy(day)
+
+S -> SS : sortSubjects(subjects)
+SS --> S : sortedSubjects
+
+S -> P : getDailyPlan(day)
+P --> S : Map<Subject, Integer>
+
+loop dla każdego przedmiotu
+    S -> Subj : study(hours)
+    S -> SE : add to history
+end
+
+S -> M : apply()
+M --> S : adjustMotivation()
+
+note right of S
+Dzień zakończony
+end note
 @enduml
