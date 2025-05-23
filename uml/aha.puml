@@ -1,0 +1,30 @@
+@startuml
+' ==== Obiekty ====
+object "student : Student\n(nazwa: Jan Kowalski,\nmotywacja: 70)" as student
+object "plan : Plan\n(dni: 7)" as plan
+object "subject1 : Subject\n(nazwa: Matematyka,\nects: 5,\npredyspozycje: 2)" as math
+object "subject2 : Subject\n(nazwa: Programowanie,\nects: 4,\npredyspozycje: 4)" as prog
+object "sorter : SubjectSorter" as sorter
+object "event1 : StudyEvent\n(Mat. 2h, dzień 1)" as event1
+object "event2 : StudyEvent\n(Prog. 3h, dzień 2)" as event2
+object "break : CoffeeBreak" as break
+object "procrast : Procrastination" as procrast
+object "result1 : ExamResult\n(Mat., score: 80, passed: true)" as result1
+object "result2 : ExamResult\n(Prog., score: 55, passed: true)" as result2
+
+' ==== Relacje (czytelne opisy) ====
+student --> plan : posiada plan
+student --> math : uczy się
+student --> prog : uczy się
+student --> event1 : historia
+student --> event2 : historia
+student --> break : stosuje motywator
+student --> procrast : stosuje motywator
+plan --> math : planuje naukę
+plan --> prog : planuje naukę
+sorter --> plan : posortowane
+plan --> sorter : pobiera przedmioty
+result1 --> math : wynik z
+result2 --> prog : wynik z
+
+@enduml
