@@ -1,4 +1,4 @@
-- [ ] **Klasa Subject**
+- [ ?] **Klasa Subject**
   - Pola: nazwa, trudność, predyspozycje, wymagany czas nauki, czas przeznaczony na naukę, ects.
   - Metody: study(), isReady(), getProgress(), getName(), getDifficulty(), getPredispositions()
 
