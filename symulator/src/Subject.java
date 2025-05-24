@@ -51,6 +51,12 @@ public class Subject {
 //    public int getDifficulty() {
 //        return difficulty;
 //    }
+ public int getRequiredTime() {
+        return requiredTime;
+ }
+    public int getStudiedTime() {
+        return studiedTime;
+    }
 
     public int getPredispositions() {
         return predispositions;
