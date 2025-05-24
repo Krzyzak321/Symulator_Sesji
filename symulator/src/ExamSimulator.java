@@ -6,6 +6,6 @@ public class ExamSimulator {
     private int days;
 
     public void run() {
-        // implementacja
+        // implementacja kurde to będzie piekło
     }
 }
