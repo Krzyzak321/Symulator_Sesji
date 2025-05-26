@@ -57,6 +57,7 @@ public class Subject {
     public int getStudiedTime() {
         return studiedTime;
     }
+    public int getEcts() {return ects;}
 
     public int getPredispositions() {
         return predispositions;
