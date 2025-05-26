@@ -2,7 +2,20 @@ import java.util.*;
 
 public class Plan {
     private int days;
-    private Map<Integer, Map<Subject, Integer>> schedule = new HashMap<>();
+    private Map<Integer, Map<Subject, Integer>> schedule ;
+    Plan(int days) {
+        this.days = days;
+        this.schedule = new HashMap<>();
+    }
+    Plan(int days, List<Subject> subjects, int mode) {
+        this.days = days;
+        this.schedule = new HashMap<>();
+        generate(subjects,days,mode);
+    }
+    public Plan(int days, Map<Integer, Map<Subject, Integer>> schedule) {
+        this.days = days;
+        this.schedule = schedule;
+    } // jak gotowy harmonorgram
 
     /*
      * Generuje plan nauki według wybranego trybu.

@@ -3,7 +3,7 @@ import java.util.List;
 public class ExamSimulator {
     private Student student;
     private List<Motivator> motivators;
-    private int days;
+    public static int days;
 
     public void run() {
         // implementacja kurde to będzie piekło
