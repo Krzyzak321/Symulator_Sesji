@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Student {
@@ -6,14 +7,23 @@ public class Student {
     private Plan plan;
     private List<Subject> subjects;
     private List<StudyEvent> history;
+    Student(String name, int motivation, Plan plan, List<Subject> subjects) {
+        this.name = name;
 
+        //kurcze
+    }
     public void study(int day) {
         // implementacja
+
     }
 
-    public List<ExamResult> takeExams() {
+    public List<ExamResult> takeExams(List<Subject> subjects) {
         // implementacja
-        return null;
+        List<ExamResult> wyniki = new ArrayList<>();
+        for (int i=0; i<subjects.size(); i++) {
+            wyniki.add(new ExamResult(subjects.get(i)));
+        }
+        return wyniki;
     }
 
     public void applyMotivator(Motivator m) {

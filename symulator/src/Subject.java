@@ -15,6 +15,7 @@ public class Subject {
         this.studiedTime = studiedTime;
         requiredTime =  18*ects*(predispositions/100);
     }
+    // polimorfizm !!! siema
     Subject (String name, int ects, int predispositions) {
         this.name = name;
         this.ects = ects;

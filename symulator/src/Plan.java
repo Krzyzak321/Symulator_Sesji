@@ -9,6 +9,7 @@ public class Plan {
      *  subjects lista przedmiotów
      * totalDays liczba dni nauki
      *  mode 0 = każdy przedmiot codziennie; 1 = po kolei każdy przedmiot do końca
+     * uważem ze to całkiem niezłe bo można dzięki temu rozbudowac troche bardziej motywacje
      */
     public void generate(List<Subject> subjects, int totalDays, int mode) {
         this.days = totalDays;
@@ -18,8 +19,6 @@ public class Plan {
             generateAllEveryDay(subjects, totalDays);
         } else if (mode == 1) {
             generateOneAtATime(subjects, totalDays);
-        } else {
-            throw new IllegalArgumentException("Nieznany tryb generowania planu: " + mode);
         }
     }
 
@@ -34,7 +33,7 @@ public class Plan {
 
             for (int day = 1; day <= days; day++) {
                 int hours = hoursPerDay;
-                if (day <= extraHours) hours++;
+                if (day <= extraHours) hours++; // dodatkowe godziny rozkładają sie po kolejnych niach
                 schedule.get(day).put(subject, hours);
             }
         }
@@ -46,7 +45,7 @@ public class Plan {
         }
 
         int currentDay = 1;
-        int maxHoursPerDay = 8; // Przykładowo max 8h nauki dziennie
+        int maxHoursPerDay = 8; //  max 8h nauki dziennie
 
         for (Subject subject : subjects) {
             int hoursLeft = subject.getRequiredTime();
@@ -71,7 +70,6 @@ public class Plan {
         return schedule.getOrDefault(day, Collections.emptyMap());
     }
 
-    // Prosta wizualizacja planu
     public void printPlan() {
         for (int day = 1; day <= days; day++) {
             System.out.println("Dzień " + day + ":");
