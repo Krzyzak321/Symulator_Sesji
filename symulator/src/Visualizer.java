@@ -1,17 +1,34 @@
 import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.List;
-
+import java.awt.Color;
+import java.util.stream.Collectors;
 public class Visualizer {
     private int numberOfSubjects;
     private JFrame window;
     private JPanel panel;
+    private JList<String> subjectList;
 
     //Zwizualizuj studenta? nwm potrzebna liczba przedmiotow
     Visualizer(Student student) {
         this.numberOfSubjects = getNumberOfSubjects(student.getSubjects());
-        this.window = new JFrame();
-        this.panel = new JPanel();
+        this.window = new JFrame("Visualizer");
+        this.panel = new JPanel(new BorderLayout());
+        panel.setBackground(Color.LightBlue);
+         //tu pobranie tych przedmiotow a pozniej stworzenie listy z nich
+        List<String> subjectNames = student.getSubjects().stream()
+                .map(Subject::getName)
+                .collect(Collectors.toList());
+        subjectList = new JList<>(subjectNames.toArray(new String[0]));
+        JScrollPane listScrollPane = new JScrollPane(subjectList);
+        //dalem liste przedmiotow na lewac czesc panelu, wstepnie pozniej pomysle
+        panel.add(listScrollPane, BorderLayout.WEST);
+
+        window.add(panel);
+        window.setSize(800, 600);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
     }
 
     private static int getNumberOfSubjects(List<Subject> subjects) {
