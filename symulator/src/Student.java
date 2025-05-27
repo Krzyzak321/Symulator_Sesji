@@ -17,10 +17,16 @@ public class Student {
     public void study(int day) {
         // implementacja
 //        StudyEvent study = new StudyEvent(plan.getDailyPlan(day).get(0),plan.getDailyPlan(day).get(1), day);
+        motivation=100;
         Map<Subject, Integer> dailyPlan = plan.getDailyPlan(day);
         for (Map.Entry<Subject, Integer> entry : dailyPlan.entrySet()) {
             Subject subject = entry.getKey();
             int hours = entry.getValue();
+            motivation -= 10*hours;
+            for (int i=0;i<hours;i++) {
+            setMotivation(motivation);
+            }
+
             StudyEvent study = new StudyEvent(subject, hours, day);
             history.add(study);
         }
