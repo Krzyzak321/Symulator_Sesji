@@ -28,11 +28,8 @@ public class ExamSimulator {
                     System.out.println("Godzina " + (h+1) + " - zastosowano: " + motivator.getName() +
                             ", motywacja: " + student.getMotivation());
 
-                    // Przykład: efektywność nauki zależna od motywacji
-                    double efektywnosc = Math.max(0.1, student.getMotivation() / 100.0); // minimum 10%
-                    studied += efektywnosc;
                 }
-                subject.study(studied);
+                student.study(studied);
                 System.out.println("Przedmiot: " + subject.getName() + " - postęp: " + studied);
                 StudyEvent event = new StudyEvent(subject, hours, day, student.getMotivation());
                 student.getHistory().add(event);

@@ -16,6 +16,7 @@ public class Student {
     }
     public void study(int day) {
         if (plan == null) return;
+        motivation = 100;
         Map<Subject, Integer> dailyPlan = plan.getDailyPlan(day);
         for (Map.Entry<Subject, Integer> entry : dailyPlan.entrySet()) {
             Subject subject = entry.getKey();
@@ -46,8 +47,8 @@ public class Student {
     }
 
     public void setMotivation(int motivation) {
-        if (motivation > 100) {
-            this.motivation = 100;
+        if (motivation > 200) {
+            this.motivation = 200;
         } else if (motivation < 0) {
             this.motivation = 0;
         } else {
