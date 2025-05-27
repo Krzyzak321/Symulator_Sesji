@@ -6,7 +6,7 @@ public class ExamSimulator {
     public static int days;
 
     public void run() {
-        // implementacja kurde to będzie piekło...
+        // implementacja kurde to będzie piekło...a
 
     }
 }
