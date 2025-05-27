@@ -6,7 +6,7 @@ public class ExamResult {
     private boolean passed;
     private Random rand = new Random();
     ExamResult(Subject subject) {
-        int losowosc = rand.nextInt(11)-10;
+        int losowosc = rand.nextInt(16)-10;
         this.subject = subject;
         score=subject.getProgress()+losowosc;
         if (score>=50) {
@@ -27,7 +27,7 @@ public class ExamResult {
         else {grade = "Oblany";}
         return "Przedmiot "+ subject.getName() + " został " + grade;
     }
-
+    public double getScore() {return score;}
     public String getSubjectName() {
         return subject != null ? subject.getName() : "";
     }

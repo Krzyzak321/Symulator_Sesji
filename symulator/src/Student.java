@@ -10,23 +10,29 @@ public class Student {
     private List<StudyEvent> history;
     Student(String name, List<Subject> subjects, int mode) {
         this.name = name;
+        this.subjects = subjects;
+        this.history = new ArrayList<>();
         int days = ExamSimulator.days;
-        Plan plan = new Plan(days, subjects, mode);
+        this.plan = new Plan(days, subjects, mode);
+        this.motivation = 100;
+//        int days = ExamSimulator.days;
+//        Plan plan = new Plan(days, subjects, mode);
         //kurcze co ja robie
     }
-    public void study(int day) {
-        if (plan == null) return;
-        motivation = 100;
-        Map<Subject, Integer> dailyPlan = plan.getDailyPlan(day);
-        for (Map.Entry<Subject, Integer> entry : dailyPlan.entrySet()) {
-            Subject subject = entry.getKey();
-            int hours = entry.getValue();
-            for (int i = 0; i < hours; i++) {
-                motivation -= 1;// odejmuj 10 za każdą godzinę
-            }
+    public void study(Subject subject, int hours, int day) {
+
+        //        if (plan == null) return;
+//        motivation = 100;
+//        Map<Subject, Integer> dailyPlan = plan.getDailyPlan(day);
+//        for (Map.Entry<Subject, Integer> entry : dailyPlan.entrySet()) {
+//            Subject subject = entry.getKey();
+//            int hours = entry.getValue();
+//            for (int i = 0; i < hours; i++) {
+//                motivation -= 1;// odejmuj 10 za każdą godzinę
+//            }
             StudyEvent study = new StudyEvent(subject, hours, day, motivation);
             history.add(study);
-        }
+//        }
     }
 
     public List<ExamResult> takeExams(List<Subject> subjects) {

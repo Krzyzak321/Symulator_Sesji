@@ -6,7 +6,7 @@ public class StudyEvent {
         this.subject = subject;
         this.hours = hours;
         this.day = day;
-        subject.study((int)(hours*(motivation/100)));
+        subject.study((hours*(motivation/100)));
     }
     public String getDescription() {
         return subject.getName() + " " + hours + " " + day;
