@@ -27,9 +27,9 @@ public class Visualizer{
         frame.setTitle("Symulator Sesji");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-
+        frame.setSize(800, 600);
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        panel.setPreferredSize(new Dimension(750, calculateHeight(numberOfCharts)));
+        panel.setPreferredSize(new Dimension(800, calculateHeight(numberOfCharts)));
         panel.setBorder(BorderFactory.createLineBorder(Color.RED));
 
         JPanel outerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -55,8 +55,8 @@ public class Visualizer{
 
     public static int calculateHeight(int numberOfCharts){
         double rows = (double)numberOfCharts /3;
-        int realRows = (int)Math.floor(rows);
-        return 250*realRows;
+        int realRows = (int)Math.ceil(rows);
+        return 261*realRows;
     }
 }
 

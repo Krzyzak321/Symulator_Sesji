@@ -1,6 +1,9 @@
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
 public class Subject {
     private String name;
-//    private int difficulty; chyba do wywalenia
+    //    private int difficulty; chyba do wywalenia
     private int predispositions;
     private int requiredTime;
     private double studiedTime;
@@ -16,7 +19,7 @@ public class Subject {
         }
         else this.predispositions = predispositions;
         this.studiedTime = studiedTime;
-        requiredTime =  18*ects*(predispositions/100);
+        requiredTime =  18*ects-(predispositions/100);
 
         this.dataset = new DefaultPieDataset();
         this.dataset.setValue("requiredTime", requiredTime);
@@ -31,8 +34,8 @@ public class Subject {
         }
         else this.predispositions = predispositions;
         this.studiedTime = 0;
-        requiredTime =  18*ects*(predispositions/100);
-
+        requiredTime =  18*ects-(predispositions/100);
+        this.dataset = new DefaultPieDataset();
         this.dataset.setValue("requiredTime", requiredTime);
         this.dataset.setValue("studiedTime", studiedTime);
     }
@@ -57,12 +60,12 @@ public class Subject {
         return name;
     }
 
-//    public int getDifficulty() {
+    //    public int getDifficulty() {
 //        return difficulty;
 //    }
- public int getRequiredTime() {
+    public int getRequiredTime() {
         return requiredTime;
- }
+    }
     public double getStudiedTime() {
         return studiedTime;
     }

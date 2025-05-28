@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +9,10 @@ public class Main {
 
         // Tworzymy przedmioty
         List<Subject> subjects = new ArrayList<>();
-        subjects.add(new Subject("Matematyka", 6, 70));
-        subjects.add(new Subject("Fizyka", 5, 60));
-        subjects.add(new Subject("Historia", 3, 80));
-        subjects.add(new Subject("Programowanie", 4, 50));
+        subjects.add(new Subject("Matematyka", 6, 70, 2));
+        subjects.add(new Subject("Fizyka", 5, 60, 10));
+        subjects.add(new Subject("Historia", 3, 80, 50));
+        subjects.add(new Subject("Programowanie", 4, 50, 15));
 
         // Tworzymy studenta
         Student student = new Student("Janek", subjects, 0, days); // tryb 0 = wszystkie codziennie
@@ -37,5 +38,8 @@ public class Main {
         for (StudyEvent event : student.getHistory()) {
             System.out.println(event.getDescription());
         }
+
+        Visualizer siema = new Visualizer(student);
+        siema.visualize();
     }
 }
