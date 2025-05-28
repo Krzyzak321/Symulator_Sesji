@@ -24,7 +24,7 @@ public class Subject {
         }
         else this.predispositions = predispositions;
         this.studiedTime = 0;
-        requiredTime =  18*ects*(predispositions/100);
+        requiredTime =  18*ects;
     }
 
     public void study(double hours) {
@@ -39,10 +39,8 @@ public class Subject {
     }
 
     public double getProgress() {
-        if(studiedTime >= 0) {
-            return (studiedTime / requiredTime)*100;
-        }
-        return 0.0;
+        if (requiredTime == 0) return 100;
+        return ((double) studiedTime / requiredTime) * 100;
     }
 
     public String getName() {

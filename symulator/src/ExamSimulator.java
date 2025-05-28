@@ -4,7 +4,7 @@ import java.util.Random;
 public class ExamSimulator {
     private Student student;
     private List<Motivator> motivators;
-    private int days;
+    public static int days;
 
     public ExamSimulator(Student student, List<Motivator> motivators, int days) {
         this.student = student;
