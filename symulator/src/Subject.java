@@ -1,3 +1,6 @@
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
 public class Subject {
     private String name;
 //    private int difficulty; chyba do wywalenia
@@ -5,6 +8,9 @@ public class Subject {
     private int requiredTime;
     private double studiedTime;
     private final int ects;
+    public DefaultPieDataset dataset;
+    public JFreeChart chart;
+
     Subject (String name, int ects, int predispositions, int studiedTime) {
         this.name = name;
         this.ects = ects;
@@ -14,6 +20,10 @@ public class Subject {
         else this.predispositions = predispositions;
         this.studiedTime = studiedTime;
         requiredTime =  18*ects*(predispositions/100);
+
+        this.dataset = new DefaultPieDataset();
+        this.dataset.setValue("requiredTime", requiredTime);
+        this.dataset.setValue("studiedTime", studiedTime);
     }
     // polimorfizm !!! siema
     Subject (String name, int ects, int predispositions) {
@@ -25,6 +35,9 @@ public class Subject {
         else this.predispositions = predispositions;
         this.studiedTime = 0;
         requiredTime =  18*ects*(predispositions/100);
+
+        this.dataset.setValue("requiredTime", requiredTime);
+        this.dataset.setValue("studiedTime", studiedTime);
     }
 
     public void study(double hours) {
