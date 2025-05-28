@@ -19,7 +19,7 @@ public class Student {
 //        Plan plan = new Plan(days, subjects, mode);
         //kurcze co ja robie
     }
-    public void study(Subject subject, int hours, int day) {
+    public void study(Subject subject, double hours, int day) {
 
         //        if (plan == null) return;
 //        motivation = 100;

@@ -2,7 +2,7 @@ public class Subject {
     private String name;
 //    private int difficulty; chyba do wywalenia
     private int predispositions;
-    private int requiredTime;
+    private double requiredTime;
     private double studiedTime;
     private final int ects;
     Subject (String name, int ects, int predispositions, int studiedTime) {
@@ -13,7 +13,7 @@ public class Subject {
         }
         else this.predispositions = predispositions;
         this.studiedTime = studiedTime;
-        requiredTime =  18*ects*(predispositions/100);
+        requiredTime =  18*ects*(predispositions/100.0);
     }
     // polimorfizm !!! siema
     Subject (String name, int ects, int predispositions) {
@@ -24,7 +24,7 @@ public class Subject {
         }
         else this.predispositions = predispositions;
         this.studiedTime = 0;
-        requiredTime =  18*ects-(int)(8*ects*(predispositions/100.0));
+        requiredTime =  18*ects-(8*ects*(predispositions/100.0));
     }
 
     public void study(double hours) {
@@ -50,7 +50,7 @@ public class Subject {
 //    public int getDifficulty() {
 //        return difficulty;
 //    }
- public int getRequiredTime() {
+ public double getRequiredTime() {
         return requiredTime;
  }
     public double getStudiedTime() {

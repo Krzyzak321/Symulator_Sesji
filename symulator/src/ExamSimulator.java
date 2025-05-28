@@ -20,20 +20,20 @@ public class ExamSimulator {
             var dailyPlan = student.getPlan().getDailyPlan(day);
             for (var entry : dailyPlan.entrySet()) {
                 Subject subject = entry.getKey();
-                int hours = entry.getValue();
+                double hours = entry.getValue();
                 double studied = 0.0;
                 for (int h = 0; h < hours; h++) {
                     // Losowanie motivatora co godzinę
                     student.setMotivation(student.getMotivation() - 1);
                     Motivator motivator = motivators.get(random.nextInt(motivators.size()));
                     student.applyMotivator(motivator);
-//                    System.out.println("Godzina " + (h+1) + " - zastosowano: " + motivator.getName() +
-//                            ", motywacja: " + student.getMotivation());
-                    student.study(subject, 1, day);
+                    System.out.println("Godzina " + (h+1) + " - zastosowano: " + motivator.getName() +
+                            ", motywacja: " + student.getMotivation());
+
         // implementacja kurde to będzie piekło...
 
                 }
-
+                student.study(subject, hours, day);
                 System.out.println("Przedmiot: " + subject.getName() + " - postęp: " + subject.getProgress());
 //                StudyEvent event = new StudyEvent(subject, hours, day, student.getMotivation());
 //                student.getHistory().add(event);

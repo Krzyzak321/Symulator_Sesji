@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Plan {
     private int days;
-    private Map<Integer, Map<Subject, Integer>> schedule ;
+    private Map<Integer, Map<Subject, Double>> schedule ;
     Plan(int days) {
         this.days = days;
         this.schedule = new HashMap<>();
@@ -12,7 +12,7 @@ public class Plan {
         this.schedule = new HashMap<>();
         generate(subjects,days,mode);
     }
-    public Plan(int days, Map<Integer, Map<Subject, Integer>> schedule) {
+    public Plan(int days, Map<Integer, Map<Subject, Double>> schedule) {
         this.days = days;
         this.schedule = schedule;
     } // jak gotowy harmonorgram
@@ -42,13 +42,13 @@ public class Plan {
             schedule.put(day, new HashMap<>());
         }
         for (Subject subject : subjects) {
-            int required = subject.getRequiredTime();
-            int hoursPerDay = required / days;
-            int extraHours = required % days;
+            double required = subject.getRequiredTime();
+            double hoursPerDay = required / days;
+//            int extraHours = required % days;
 
             for (int day = 1; day <= days; day++) {
-                int hours = hoursPerDay;
-                if (day <= extraHours) hours++; // dodatkowe godziny rozkładają sie po kolejnych niach
+                double hours = hoursPerDay;
+//                if (day <= extraHours) hours++; // dodatkowe godziny rozkładają sie po kolejnych niach
                 schedule.get(day).put(subject, hours);
             }
         }
@@ -63,15 +63,15 @@ public class Plan {
         int maxHoursPerDay = 8; //  max 8h nauki dziennie
 
         for (Subject subject : subjects) {
-            int hoursLeft = subject.getRequiredTime();
+            double hoursLeft = subject.getRequiredTime();
             while (hoursLeft > 0 && currentDay <= days) {
-                int alreadyPlanned = schedule.get(currentDay).values().stream().mapToInt(Integer::intValue).sum();
+                int alreadyPlanned = schedule.get(currentDay).values().stream().mapToInt(Double::intValue).sum();
                 int available = maxHoursPerDay - alreadyPlanned;
                 if (available <= 0) {
                     currentDay++;
                     continue;
                 }
-                int hoursToday = Math.min(hoursLeft, available);
+                double hoursToday = Math.min(hoursLeft, available);
                 schedule.get(currentDay).put(subject, hoursToday);
                 hoursLeft -= hoursToday;
                 if (available == hoursToday) {
@@ -81,15 +81,15 @@ public class Plan {
         }
     }
 
-    public Map<Subject, Integer> getDailyPlan(int day) {
+    public Map<Subject, Double> getDailyPlan(int day) {
         return schedule.getOrDefault(day, Collections.emptyMap());
     }
 
     public void printPlan() {
         for (int day = 1; day <= days; day++) {
             System.out.println("Dzień " + day + ":");
-            Map<Subject, Integer> dayPlan = getDailyPlan(day);
-            for (Map.Entry<Subject, Integer> entry : dayPlan.entrySet()) {
+            Map<Subject, Double> dayPlan = getDailyPlan(day);
+            for (Map.Entry<Subject, Double> entry : dayPlan.entrySet()) {
                 System.out.println("  " + entry.getKey().getName() + " - " + entry.getValue() + "h");
             }
         }
