@@ -8,11 +8,11 @@ public class Student {
     private Plan plan;
     private List<Subject> subjects;
     private List<StudyEvent> history;
-    Student(String name, List<Subject> subjects, int mode) {
+    Student(String name, List<Subject> subjects, int mode, int days) {
         this.name = name;
         this.subjects = subjects;
         this.history = new ArrayList<>();
-        int days = ExamSimulator.days;
+//        int days = ExamSimulator.getda;
         this.plan = new Plan(days, subjects, mode);
         this.motivation = 100;
 //        int days = ExamSimulator.days;

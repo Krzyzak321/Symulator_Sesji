@@ -27,7 +27,9 @@ public class Plan {
     public void generate(List<Subject> subjects, int totalDays, int mode) {
         this.days = totalDays;
         schedule.clear();
-
+        if (days <= 0) {
+            throw new IllegalArgumentException("Liczba dni musi być większa od 0");
+        }
         if (mode == 0) {
             generateAllEveryDay(subjects, totalDays);
         } else if (mode == 1) {

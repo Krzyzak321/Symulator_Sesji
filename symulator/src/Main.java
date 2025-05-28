@@ -14,7 +14,7 @@ public class Main {
         subjects.add(new Subject("Programowanie", 4, 50));
 
         // Tworzymy studenta
-        Student student = new Student("Janek", subjects, 0); // tryb 0 = wszystkie codziennie
+        Student student = new Student("Janek", subjects, 0, days); // tryb 0 = wszystkie codziennie
 
         // Tworzymy motywatory
         List<Motivator> motivators = new ArrayList<>();
@@ -24,7 +24,7 @@ public class Main {
         // Uruchamiamy symulator
         ExamSimulator simulator = new ExamSimulator(student, motivators, days);
         simulator.run();
-
+        student.getPlan().printPlan();
         // Wyświetlamy wyniki egzaminów
         List<ExamResult> results = student.takeExams(subjects);
         System.out.println("\nWYNIKI EGZAMINÓW:");
