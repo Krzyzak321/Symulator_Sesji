@@ -3,8 +3,8 @@ public class Subject {
 //    private int difficulty; chyba do wywalenia
     private int predispositions;
     private int requiredTime;
-    private int studiedTime;
-    private int ects;
+    private double studiedTime;
+    private final int ects;
     Subject (String name, int ects, int predispositions, int studiedTime) {
         this.name = name;
         this.ects = ects;
@@ -27,7 +27,7 @@ public class Subject {
         requiredTime =  18*ects*(predispositions/100);
     }
 
-    public void study(int hours) {
+    public void study(double hours) {
         studiedTime += hours;
     }
 
@@ -55,7 +55,7 @@ public class Subject {
  public int getRequiredTime() {
         return requiredTime;
  }
-    public int getStudiedTime() {
+    public double getStudiedTime() {
         return studiedTime;
     }
     public int getEcts() {return ects;}

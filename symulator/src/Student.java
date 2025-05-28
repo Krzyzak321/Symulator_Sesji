@@ -10,21 +10,29 @@ public class Student {
     private List<StudyEvent> history;
     Student(String name, List<Subject> subjects, int mode) {
         this.name = name;
+        this.subjects = subjects;
+        this.history = new ArrayList<>();
         int days = ExamSimulator.days;
-        Plan plan = new Plan(days, subjects, mode);
+        this.plan = new Plan(days, subjects, mode);
+        this.motivation = 100;
+//        int days = ExamSimulator.days;
+//        Plan plan = new Plan(days, subjects, mode);
         //kurcze co ja robie
     }
-    public void study(int day) {
-        // implementacja
-//        StudyEvent study = new StudyEvent(plan.getDailyPlan(day).get(0),plan.getDailyPlan(day).get(1), day);
-        Map<Subject, Integer> dailyPlan = plan.getDailyPlan(day);
-        for (Map.Entry<Subject, Integer> entry : dailyPlan.entrySet()) {
-            Subject subject = entry.getKey();
-            int hours = entry.getValue();
-            StudyEvent study = new StudyEvent(subject, hours, day);
+    public void study(Subject subject, int hours, int day) {
+
+        //        if (plan == null) return;
+//        motivation = 100;
+//        Map<Subject, Integer> dailyPlan = plan.getDailyPlan(day);
+//        for (Map.Entry<Subject, Integer> entry : dailyPlan.entrySet()) {
+//            Subject subject = entry.getKey();
+//            int hours = entry.getValue();
+//            for (int i = 0; i < hours; i++) {
+//                motivation -= 1;// odejmuj 10 za każdą godzinę
+//            }
+            StudyEvent study = new StudyEvent(subject, hours, day, motivation);
             history.add(study);
-        }
-        // kurde nei wiem co z tą motywacją
+//        }
     }
 
     public List<ExamResult> takeExams(List<Subject> subjects) {
@@ -37,7 +45,7 @@ public class Student {
     }
 
     public void applyMotivator(Motivator m) {
-        // implementacja
+        m.apply(this);
     }
 
     public int getMotivation() {
@@ -45,7 +53,13 @@ public class Student {
     }
 
     public void setMotivation(int motivation) {
-        this.motivation = motivation;
+        if (motivation > 200) {
+            this.motivation = 200;
+        } else if (motivation < 0) {
+            this.motivation = 0;
+        } else {
+            this.motivation = motivation;
+        }
     }
 
     public Plan getPlan() {
