@@ -1,6 +1,3 @@
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.general.DefaultPieDataset;
-
 public class Subject {
     private String name;
 //    private int difficulty; chyba do wywalenia
@@ -52,10 +49,8 @@ public class Subject {
     }
 
     public double getProgress() {
-        if(studiedTime >= 0) {
-            return (studiedTime / requiredTime)*100;
-        }
-        return 0.0;
+        if (requiredTime == 0) return 100;
+        return ((double) studiedTime / requiredTime) * 100;
     }
 
     public String getName() {

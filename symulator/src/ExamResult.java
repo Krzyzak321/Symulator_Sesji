@@ -31,4 +31,7 @@ public class ExamResult {
     public String getSubjectName() {
         return subject != null ? subject.getName() : "";
     }
+    public String toString() {
+        return "Przedmiot: " + subject.getName() + ", wynik: " + score;
+    }
 }

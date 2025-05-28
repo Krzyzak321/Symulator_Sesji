@@ -30,6 +30,7 @@ public class ExamSimulator {
 //                    System.out.println("Godzina " + (h+1) + " - zastosowano: " + motivator.getName() +
 //                            ", motywacja: " + student.getMotivation());
                     student.study(subject, 1, day);
+        // implementacja kurde to będzie piekło...
 
                 }
 
@@ -39,4 +40,5 @@ public class ExamSimulator {
             }
         }
     }
+    public int getDays() {return days;}
 }
