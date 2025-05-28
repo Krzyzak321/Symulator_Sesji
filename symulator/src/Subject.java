@@ -24,7 +24,7 @@ public class Subject {
         }
         else this.predispositions = predispositions;
         this.studiedTime = 0;
-        requiredTime =  18*ects;
+        requiredTime =  18*ects-(int)(8*ects*(predispositions/100.0));
     }
 
     public void study(double hours) {
