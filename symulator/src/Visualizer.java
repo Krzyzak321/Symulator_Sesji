@@ -28,6 +28,7 @@ public class Visualizer{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setSize(800, 600);
+
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));
         panel.setPreferredSize(new Dimension(800, calculateHeight(numberOfCharts)));
         panel.setBorder(BorderFactory.createLineBorder(Color.RED));
@@ -36,6 +37,7 @@ public class Visualizer{
         outerPanel.add(panel);
 
         JScrollPane scrollPane = new JScrollPane(outerPanel);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         frame.add(scrollPane);
         frame.setVisible(true);
     }
@@ -51,6 +53,21 @@ public class Visualizer{
         chartPanel.setPreferredSize(new Dimension(250, 250));
 
         panel.add(chartPanel);
+    }
+
+    public void updateGraph(Subject subject, double timeStudied){
+        double requiredTime = (double)subject.getRequiredTime();
+
+        double currentValue=(double) subject.dataset.getValue("studiedTime");
+        subject.dataset.setValue("studiedTime", currentValue+timeStudied);
+
+        int green = (int)(currentValue/requiredTime)*255;
+        int red = 255-green;
+
+        PiePlot plot = (PiePlot) subject.chart.getPlot();
+        plot.setSectionPaint("Caly", new Color(red, green, 0));
+        panel.revalidate();
+        panel.repaint();
     }
 
     public static int calculateHeight(int numberOfCharts){

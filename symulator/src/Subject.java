@@ -22,8 +22,8 @@ public class Subject {
         requiredTime =  18*ects-(predispositions/100);
 
         this.dataset = new DefaultPieDataset();
-        this.dataset.setValue("requiredTime", requiredTime);
         this.dataset.setValue("studiedTime", studiedTime);
+        this.dataset.setValue("timeLeft", requiredTime-studiedTime);
     }
     // polimorfizm !!! siema
     Subject (String name, int ects, int predispositions) {
@@ -36,8 +36,8 @@ public class Subject {
         this.studiedTime = 0;
         requiredTime =  18*ects-(predispositions/100);
         this.dataset = new DefaultPieDataset();
-        this.dataset.setValue("requiredTime", requiredTime);
         this.dataset.setValue("studiedTime", studiedTime);
+        this.dataset.setValue("timeLeft", requiredTime-studiedTime);
     }
 
     public void study(double hours) {
