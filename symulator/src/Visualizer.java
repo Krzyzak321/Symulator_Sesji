@@ -57,11 +57,13 @@ public class Visualizer{
 
     public void updateGraph(Subject subject, double timeStudied){
         double requiredTime = (double)subject.getRequiredTime();
+        double currentStudiedTime=(double) subject.dataset.getValue("studiedTime");
+        double currentTimeLeft = (double) subject.dataset.getValue("timeLeft");
 
-        double currentValue=(double) subject.dataset.getValue("studiedTime");
-        subject.dataset.setValue("studiedTime", currentValue+timeStudied);
+        subject.dataset.setValue("studiedTime", currentStudiedTime+timeStudied);
+        subject.dataset.setValue("timeLeft", currentTimeLeft-timeStudied);
 
-        int green = (int)(currentValue/requiredTime)*255;
+        int green = (int)(currentStudiedTime/requiredTime)*255;
         int red = 255-green;
 
         PiePlot plot = (PiePlot) subject.chart.getPlot();

@@ -38,6 +38,7 @@ public class ExamSimulator {
 //                StudyEvent event = new StudyEvent(subject, hours, day, student.getMotivation());
 //                student.getHistory().add(event);
             }
+
         }
     }
     public int getDays() {return days;}
