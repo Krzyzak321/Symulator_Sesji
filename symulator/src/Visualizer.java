@@ -45,10 +45,16 @@ public class Visualizer{
     public void addChart(Subject subject){
         String name = subject.getName();
         DefaultPieDataset dataset = subject.dataset;
+        double currentStudiedTime=(double) subject.dataset.getValue("studiedTime");
+        double currentTimeLeft = (double) subject.dataset.getValue("timeLeft");
+        int color = calculateGreen(currentStudiedTime, currentTimeLeft+currentStudiedTime);
 
         JFreeChart chart = ChartFactory.createPieChart(name, dataset, true, true, false);
         subject.chart=chart;
         PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setSectionPaint("studiedTime", new Color(255-color, color, 0));
+        plot.setSectionPaint("timeLeft", Color.LIGHT_GRAY);
+
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(250, 250));
 
@@ -63,13 +69,22 @@ public class Visualizer{
         subject.dataset.setValue("studiedTime", currentStudiedTime+timeStudied);
         subject.dataset.setValue("timeLeft", currentTimeLeft-timeStudied);
 
-        int green = (int)(currentStudiedTime/requiredTime)*255;
+        int green = calculateGreen(currentStudiedTime, requiredTime);
         int red = 255-green;
 
         PiePlot plot = (PiePlot) subject.chart.getPlot();
-        plot.setSectionPaint("Caly", new Color(red, green, 0));
+        plot.setSectionPaint("studiedTime", new Color(red, green, 0));
+
         panel.revalidate();
         panel.repaint();
+    }
+
+    public static int calculateGreen(int studiedTime, int requiredTime){
+        return (int)(((double)studiedTime/(double)requiredTime)*255);
+    }
+
+    public static int calculateGreen(double studiedTime, double requiredTime){
+        return (int)((studiedTime/requiredTime)*255);
     }
 
     public static int calculateHeight(int numberOfCharts){

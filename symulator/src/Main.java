@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) {
@@ -41,5 +42,15 @@ public class Main {
 
         Visualizer siema = new Visualizer(student);
         siema.visualize();
+
+        for(int i=0; i<1000; i++) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            siema.updateGraph(subjects.get(1), 1);
+        }
+
     }
 }
