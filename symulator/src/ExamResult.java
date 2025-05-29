@@ -34,4 +34,14 @@ public class ExamResult {
     public String toString() {
         return "Przedmiot: " + subject.getName() + ", wynik: " + score;
     }
+    //metoda do sumowania ECTS dla przedmiotów, które nie zostały zaliczone
+    public static int sumFailedEcts(java.util.List<ExamResult> results) {
+        int ectsFailedSum = 0;
+        for (ExamResult result : results) {
+            if (!result.isPassed()) {
+                ectsFailedSum += result.subject.getEcts();
+            }
+        }
+        return ectsFailedSum;
+    }
 }
