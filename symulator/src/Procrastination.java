@@ -10,7 +10,7 @@ public class Procrastination implements Motivator {
         student.setMotivation(motivation);
     }
     public String getName(){
-        return "OpierdalanieSie";
+        return "Brak chęci do nauki";
     }
     //    private List<Motivator> motivators;
 //    private Random random = new Random();

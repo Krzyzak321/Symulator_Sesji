@@ -1,6 +1,14 @@
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
+public class CoffeeBreak implements Motivator {
+    public void apply(Student student){
+
+    }
+    public String getName(){
+        return "Nic sie nie stało";
+    }
+}
 
 //public class CoffeeBreak implements Motivator {
 //    private List<Motivator> motivators;

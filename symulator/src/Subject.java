@@ -19,7 +19,7 @@ public class Subject {
         }
         else this.predispositions = predispositions;
         this.studiedTime = studiedTime;
-        requiredTime =  18*ects-(predispositions/100);
+        requiredTime =  18*ects-(int)(9*ects*(predispositions/100.0));
 
         this.dataset = new DefaultPieDataset();
         this.dataset.setValue("studiedTime", studiedTime);
@@ -34,7 +34,7 @@ public class Subject {
         }
         else this.predispositions = predispositions;
         this.studiedTime = 0;
-        requiredTime =  18*ects-(predispositions/100);
+        requiredTime =  18*ects-(int)(9*ects*(predispositions/100.0));
         this.dataset = new DefaultPieDataset();
         this.dataset.setValue("studiedTime", studiedTime);
         this.dataset.setValue("timeLeft", requiredTime-studiedTime);
