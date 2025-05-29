@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     public static void main(String[] args) {
         // Ustawiamy liczbę dni symulacji
-        int days = 14;
+        int days = 4;
 
         // Tworzymy przedmioty
         List<Subject> subjects = new ArrayList<>();
@@ -40,17 +40,10 @@ public class Main {
             System.out.println(event.getDescription());
         }
 
-        Visualizer siema = new Visualizer(student);
-        siema.visualize();
-
-        for(int i=0; i<1000; i++) {
-            try {
-                TimeUnit.MILLISECONDS.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            siema.updateGraph(subjects.get(1), 1);
-        }
+//        for(int i=0; i<1000; i++) {
+//
+//            siema.updateGraph(subjects.get(1), 1);
+//        }
 
     }
 }

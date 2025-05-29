@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class ExamSimulator {
     private Student student;
@@ -14,6 +15,10 @@ public class ExamSimulator {
 
     public void run() {
         Random random = new Random();
+        Visualizer window = new Visualizer(student);
+        window.insertPlan(student.getPlan());
+        window.visualize();
+
         for (int day = 1; day <= days; day++) {
             // Pobierz plan na dany dzień
             student.setMotivation(100);
@@ -29,12 +34,20 @@ public class ExamSimulator {
                     student.applyMotivator(motivator);
 //                    System.out.println("Godzina " + (h+1) + " - zastosowano: " + motivator.getName() +
 //                            ", motywacja: " + student.getMotivation());
+                    student.study(subject, 1, day);
+                    System.out.println("Przedmiot: " + subject.getName() + " - postęp: " + subject.getProgress());
 
+                    window.updateGraph(subject, 1);
+
+//                    try {
+//                        TimeUnit.MILLISECONDS.sleep(200);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
         // implementacja kurde to będzie piekło...
 
                 }
-                student.study(subject, hours, day);
-                System.out.println("Przedmiot: " + subject.getName() + " - postęp: " + subject.getProgress());
+
 //                StudyEvent event = new StudyEvent(subject, hours, day, student.getMotivation());
 //                student.getHistory().add(event);
             }

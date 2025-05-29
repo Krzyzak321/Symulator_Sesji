@@ -94,4 +94,7 @@ public class Plan {
             }
         }
     }
+    public int getDays(){
+        return days;
+    }
 }
