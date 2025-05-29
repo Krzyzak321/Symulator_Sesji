@@ -10,6 +10,7 @@ public class Plan {
     Plan(int days, List<Subject> subjects, int mode) {
         this.days = days;
         this.schedule = new HashMap<>();
+        subjects = SubjectSorter.sortSubjects(subjects);
         generate(subjects,days,mode);
     }
     public Plan(int days, Map<Integer, Map<Subject, Integer>> schedule) {
@@ -25,8 +26,13 @@ public class Plan {
      * uważem ze to całkiem niezłe bo można dzięki temu rozbudowac troche bardziej motywacje
      */
     public void generate(List<Subject> subjects, int totalDays, int mode) {
+
         this.days = totalDays;
         schedule.clear();
+        for (int day = 1; day <= days; day++) {
+            schedule.put(day, new HashMap<>());
+        }
+
         if (days <= 0) {
             throw new IllegalArgumentException("Liczba dni musi być większa od 0");
         }
@@ -38,26 +44,38 @@ public class Plan {
     }
 
     private void generateAllEveryDay(List<Subject> subjects, int days) {
+        int totalRequired = countTotalRequired(subjects);
+//        int hoursPerDay = Math.min(8, (int) Math.ceil((double) totalRequired / days));
         for (int day = 1; day <= days; day++) {
-            schedule.put(day, new HashMap<>());
-        }
-        for (Subject subject : subjects) {
-            int required = subject.getRequiredTime();
-            int hoursPerDay = required / days;
-            int extraHours = required % days;
-
-            for (int day = 1; day <= days; day++) {
-                int hours = hoursPerDay;
-                if (day <= extraHours) hours++; // dodatkowe godziny rozkładają sie po kolejnych niach
-                schedule.get(day).put(subject, hours);
+            Map<Subject, Integer> dayPlan = new LinkedHashMap<>();
+            int hoursLeft = 8;
+            for (Subject subject : subjects) {
+                int toStudy = Math.min(subject.getRequiredTime() / days, hoursLeft);
+                if (toStudy > 0) {
+                    dayPlan.put(subject, toStudy);
+                    hoursLeft -= toStudy;
+                }
+                if (hoursLeft == 0) break;
             }
+            schedule.put(day, dayPlan);
         }
+        //        for (Subject subject : subjects) {
+//            int required = subject.getRequiredTime();
+//            int hoursPerDay = required / days;
+//            int extraHours = required % days;
+//
+//            for (int day = 1; day <= days; day++) {
+//                int hours = hoursPerDay;
+//                if (day <= extraHours) hours++; // dodatkowe godziny rozkładają sie po kolejnych niach
+//                schedule.get(day).put(subject, hours);
+//            }
+//        }
     }
 
     private void generateOneAtATime(List<Subject> subjects, int days) {
-        for (int day = 1; day <= days; day++) {
-            schedule.put(day, new HashMap<>());
-        }
+//        for (int day = 1; day <= days; day++) {
+//            schedule.put(day, new HashMap<>());
+//        }
 
         int currentDay = 1;
         int maxHoursPerDay = 8; //  max 8h nauki dziennie
@@ -65,7 +83,11 @@ public class Plan {
         for (Subject subject : subjects) {
             int hoursLeft = subject.getRequiredTime();
             while (hoursLeft > 0 && currentDay <= days) {
-                int alreadyPlanned = schedule.get(currentDay).values().stream().mapToInt(Integer::intValue).sum();
+//                int alreadyPlanned = schedule.get(currentDay).values().stream().mapToInt(Integer::intValue).sum();
+                int alreadyPlanned = 0;
+                for (int value : schedule.get(currentDay).values()) {
+                    alreadyPlanned += value;
+                }
                 int available = maxHoursPerDay - alreadyPlanned;
                 if (available <= 0) {
                     currentDay++;
@@ -93,6 +115,13 @@ public class Plan {
                 System.out.println("  " + entry.getKey().getName() + " - " + entry.getValue() + "h");
             }
         }
+    }
+    private int countTotalRequired(List<Subject> subjects) {
+        int totalRequired = 0;
+        for (Subject subject : subjects) {
+            totalRequired += subject.getRequiredTime();
+        }
+        return totalRequired;
     }
     public int getDays(){
         return days;
