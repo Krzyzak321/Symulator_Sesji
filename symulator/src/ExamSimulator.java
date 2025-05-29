@@ -42,7 +42,7 @@ public class ExamSimulator {
 //                            ", motywacja: " + student.getMotivation());
                     student.study(subject, 1, day);
                     System.out.println("Przedmiot: " + subject.getName() + " - postęp: " + subject.getProgress());
-
+                    if(subject.isReady()){break;}
                     window.updateGraph(subject, 1);
 
 
