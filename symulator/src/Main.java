@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     public static void main(String[] args) {
         // Ustawiamy liczbę dni symulacji
-        int days = 30;
+        int days = 10;
 
         // Tworzymy przedmioty
         List<Subject> subjects = new ArrayList<>();
