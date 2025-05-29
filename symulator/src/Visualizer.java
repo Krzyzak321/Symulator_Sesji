@@ -13,29 +13,38 @@ public class Visualizer{
     JFrame frame;
     JPanel panel;
     JPanel panelPlan;
+    JLabel dayLabel;
     int numberOfCharts;
     public List<Subject> listOfSubjects;
+    int currentDay;
+    int currentTime;
 
     public Visualizer(Student student){
         this.frame = new JFrame();
         this.panel = new JPanel();
+        this.dayLabel = new JLabel("Dzień 1 Godzina 10:00");
         this.panelPlan = new JPanel();
         this.listOfSubjects = student.getSubjects();
         this.numberOfCharts = listOfSubjects.size();
+        this.currentDay=1;
+        this.currentTime=10;
 
         for ( Subject subject : listOfSubjects ) addChart(subject);
     }
 
     public void visualize(){
+        int width = calculateWindowWidth(numberOfCharts);
+        int height = calculateHeight(numberOfCharts);
+
         frame.setTitle("Symulator Sesji");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(width+400, height+100);
         frame.setLocationRelativeTo(null);
-        frame.setSize(calculateWindowWidth(numberOfCharts)+400, 600);
 
 
         //Panel z Wykresami-------------------//
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        panel.setPreferredSize(new Dimension(800, calculateHeight(numberOfCharts)));
+        panel.setPreferredSize(new Dimension(width, height));
         panel.setBorder(BorderFactory.createLineBorder(Color.RED));
 
         JPanel outerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -46,18 +55,53 @@ public class Visualizer{
 
         //-----------------------------------//
 
+
         //Panel z planem---------------------//
         panelPlan.setLayout(new BoxLayout(panelPlan, BoxLayout.Y_AXIS));
-        panelPlan.setPreferredSize(new Dimension(300, 500));
         panelPlan.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 
         JPanel outerPanel2 = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        outerPanel.add(panelPlan);
+        outerPanel2.add(panelPlan);
+
+        JScrollPane scrollPane2 = new JScrollPane(outerPanel2);
+        scrollPane2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         //-----------------------------------//
 
-        frame.add(outerPanel2, BorderLayout.EAST);
+
+        //Panel z Dniem---------------------//
+        JPanel dayPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        dayPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+        dayPanel.setPreferredSize(new Dimension(width, 50));
+        dayLabel.setFont(new Font("Arial", Font.BOLD, 28));
+        dayPanel.add(dayLabel);
+        //-----------------------------------//
+
+        //Panel z napisem PLAN---------------------//
+        JPanel planNamePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        planNamePanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+        planNamePanel.setPreferredSize(new Dimension(320, 50));
+        JLabel planNameLabel = new JLabel("Plan Nauki");
+        planNameLabel.setFont(new Font("Droid Sans Japanese", Font.BOLD, 28));
+        planNamePanel.add(planNameLabel);
+        //-----------------------------------//
+
+        //Panel Gorny---------------------//
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.setBorder(BorderFactory.createLineBorder(Color.yellow));
+        topPanel.setPreferredSize(new Dimension(width+400, 50));
+
+        topPanel.add(dayPanel, BorderLayout.WEST);
+        topPanel.add(planNamePanel, BorderLayout.EAST);
+
+        JPanel outerPanel3 = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        outerPanel3.add(topPanel);
+
+        //-----------------------------------//
+
+        frame.add(outerPanel3,BorderLayout.NORTH);
         frame.add(scrollPane, BorderLayout.WEST);
+        frame.add(scrollPane2, BorderLayout.EAST);
         frame.setVisible(true);
     }
 
@@ -94,6 +138,14 @@ public class Visualizer{
         PiePlot plot = (PiePlot) subject.chart.getPlot();
         plot.setSectionPaint("studiedTime", new Color(red, green, 0));
 
+
+        this.currentTime++;
+        if(currentTime==19) {
+            this.currentTime=10;
+            this.currentDay++;
+        }
+        this.dayLabel.setText("Dzień "+this.currentDay+" Godzina "+this.currentTime+":00");
+
         panel.revalidate();
         panel.repaint();
 
@@ -123,13 +175,26 @@ public class Visualizer{
     }
 
     public void insertPlan(Plan plan) {
-        for (int day = 1; day <= plan.getDays(); day++) {
-            System.out.println("Dzień " + day + ":");
+        panelPlan.setPreferredSize(new Dimension(300, ExamSimulator.days*100));
+
+        for (int day = 1; day <= ExamSimulator.days; day++) {
+            String dayName="Dzień " + day + ":";
+
+            JLabel label = new JLabel(dayName);
+            label.setFont(new Font("Arial", Font.BOLD, 20));
+            panelPlan.add(label);
+
             Map<Subject, Integer> dayPlan = plan.getDailyPlan(day);
             for (Map.Entry<Subject, Integer> entry : dayPlan.entrySet()) {
-                System.out.println("  " + entry.getKey().getName() + " - " + entry.getValue() + "h");
+                String sub="  " + entry.getKey().getName() + " - " + entry.getValue() + "h";
+                JLabel label2 = new JLabel(sub);
+                label2.setFont(new Font("Arial", Font.PLAIN, 17));
+
+                panelPlan.add(label2);
             }
         }
+        panelPlan.revalidate();
+        panelPlan.repaint();
     }
 
 }

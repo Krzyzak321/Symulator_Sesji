@@ -123,7 +123,4 @@ public class Plan {
         }
         return totalRequired;
     }
-    public int getDays(){
-        return days;
-    }
 }

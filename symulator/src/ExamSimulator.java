@@ -24,6 +24,9 @@ public class ExamSimulator {
             student.setMotivation(100);
             var dailyPlan = student.getPlan().getDailyPlan(day);
             for (var entry : dailyPlan.entrySet()) {
+                if(student.getMotivation()<=0){
+                    break;
+                }
                 Subject subject = entry.getKey();
                 int hours = entry.getValue();
                 double studied = 0.0;
@@ -32,6 +35,9 @@ public class ExamSimulator {
                     student.setMotivation(student.getMotivation() - 1);
                     Motivator motivator = motivators.get(random.nextInt(motivators.size()));
                     student.applyMotivator(motivator);
+                    if(student.getMotivation()<=0){
+                        break;
+                    }
 //                    System.out.println("Godzina " + (h+1) + " - zastosowano: " + motivator.getName() +
 //                            ", motywacja: " + student.getMotivation());
                     student.study(subject, 1, day);
@@ -39,11 +45,13 @@ public class ExamSimulator {
 
                     window.updateGraph(subject, 1);
 
-//                    try {
-//                        TimeUnit.MILLISECONDS.sleep(200);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
+
+
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
         // implementacja kurde to będzie piekło...
 
                 }
