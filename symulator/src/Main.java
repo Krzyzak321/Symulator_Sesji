@@ -33,6 +33,9 @@ public class Main {
         for (ExamResult result : results) {
             System.out.println(result);
         }
+        // Wyświetlamy sumę ECTS za niezdane przedmioty
+        int failedEcts = ExamResult.sumFailedEcts(results);
+        System.out.println("Suma ECTS za niezdane przedmioty: " + failedEcts);
 
         // Opcjonalnie: pokazujemy historię nauki
         System.out.println("\nHISTORIA NAUKI:");
