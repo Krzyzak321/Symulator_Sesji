@@ -12,7 +12,7 @@ public class Main {
         List<Subject> subjects = new ArrayList<>();
         subjects.add(new Subject("Matematyka", 6, 70, 2));
         subjects.add(new Subject("Fizyka", 5, 60, 10));
-        subjects.add(new Subject("Historia", 3, 80, 50));
+        subjects.add(new Subject("Historia", 3, 80, 18));
         subjects.add(new Subject("Programowanie", 4, 50, 15));
 
         // Tworzymy studenta
@@ -37,11 +37,11 @@ public class Main {
         int failedEcts = ExamResult.sumFailedEcts(results);
         System.out.println("Suma ECTS za niezdane przedmioty: " + failedEcts);
 
-        // Opcjonalnie: pokazujemy historię nauki
-        System.out.println("\nHISTORIA NAUKI:");
-        for (StudyEvent event : student.getHistory()) {
-            System.out.println(event.getDescription());
-        }
+        //  historia nauki
+//        System.out.println("\nHISTORIA NAUKI:");
+//        for (StudyEvent event : student.getHistory()) {
+//            System.out.println(event.getDescription());
+//        }
 
 //        for(int i=0; i<1000; i++) {
 //
