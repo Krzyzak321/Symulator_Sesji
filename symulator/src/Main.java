@@ -12,7 +12,7 @@ public class Main {
         List<Subject> subjects = new ArrayList<>();
         subjects.add(new Subject("Matematyka", 6, 70, 2));
         subjects.add(new Subject("Fizyka", 5, 60, 10));
-        subjects.add(new Subject("Historia", 3, 80, 50));
+        subjects.add(new Subject("Historia", 3, 80, 18));
         subjects.add(new Subject("Programowanie", 4, 50, 15));
 
         // Tworzymy studenta
