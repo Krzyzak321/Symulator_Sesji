@@ -8,6 +8,7 @@ public class Student {
     private Plan plan;
     private List<Subject> subjects;
     private List<StudyEvent> history;
+    private List<ExamResult> wyniki;
     Student(String name, List<Subject> subjects, int mode, int days) {
         this.name = name;
         this.subjects = subjects;
@@ -36,10 +37,9 @@ public class Student {
     }
 
     public List<ExamResult> takeExams(List<Subject> subjects) {
-        // implementacja
-        List<ExamResult> wyniki = new ArrayList<>();
-        for (int i=0; i<subjects.size(); i++) {
-            wyniki.add(new ExamResult(subjects.get(i)));
+        wyniki = new ArrayList<>();
+        for (Subject subject : subjects) {
+            wyniki.add(new ExamResult(subject));
         }
         return wyniki;
     }
