@@ -61,6 +61,7 @@ public class ExamSimulator {
             }
 
         }
+
     }
     public int getDays() {return days;}
 }

@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     public static void main(String[] args) {
         // Ustawiamy liczbę dni symulacji
-        int days = 15;
+        int days = 3;
 
         // Tworzymy przedmioty
         List<Subject> subjects = new ArrayList<>();
@@ -32,10 +32,13 @@ public class Main {
         System.out.println("\nWYNIKI EGZAMINÓW:");
         for (ExamResult result : results) {
             System.out.println(result);
+            student.visualizer.updateResults(result);
         }
+        student.visualizer.showResults();
         // Wyświetlamy sumę ECTS za niezdane przedmioty
         int failedEcts = ExamResult.sumFailedEcts(results);
         System.out.println("Suma ECTS za niezdane przedmioty: " + failedEcts);
+        student.visualizer.updateResults("Suma ECTS za niezdane przedmioty: " + failedEcts);
 
         //  historia nauki
 //        System.out.println("\nHISTORIA NAUKI:");

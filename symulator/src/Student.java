@@ -9,7 +9,7 @@ public class Student {
     private List<Subject> subjects;
     private List<StudyEvent> history;
     private List<ExamResult> wyniki;
-    private Visualizer visualizer;
+    public Visualizer visualizer;
 
     Student(String name, List<Subject> subjects, int mode, int days) {
         this.name = name;

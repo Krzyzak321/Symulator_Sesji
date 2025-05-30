@@ -14,6 +14,7 @@ public class Visualizer{
     JPanel panel;
     JPanel panelPlan;
     JPanel motivationPanel;
+    JPanel resultsPanel;
     JProgressBar motivationBar;
     JLabel dayLabel;
     int numberOfCharts;
@@ -26,6 +27,7 @@ public class Visualizer{
         this.panel = new JPanel();
         this.dayLabel = new JLabel("Dzień 1 Godzina 10:00");
         this.panelPlan = new JPanel();
+        this.resultsPanel = new JPanel();
         this.listOfSubjects = student.getSubjects();
         this.numberOfCharts = listOfSubjects.size();
         this.currentDay=1;
@@ -33,6 +35,9 @@ public class Visualizer{
         student.setVisualizer(this);
 
         for ( Subject subject : listOfSubjects ) addChart(subject);
+        JLabel result = new JLabel("WYNIKI EGZAMINÓW:");
+        result.setFont(new Font("Serif", Font.BOLD, 25));
+        resultsPanel.add(result);
     }
 
     public void visualize(){
@@ -208,6 +213,29 @@ public class Visualizer{
         }
         panelPlan.revalidate();
         panelPlan.repaint();
+    }
+
+    public void updateResults(ExamResult result){
+        JLabel text = new JLabel(String.valueOf(result));
+        text.setFont(new Font("Arial", Font.PLAIN, 18));
+        resultsPanel.add(text);
+    }
+
+    public void updateResults(String result){
+        JLabel text = new JLabel(result);
+        text.setFont(new Font("Arial", Font.PLAIN, 18));
+        resultsPanel.add(text);
+    }
+
+    public void showResults(){
+        JFrame resultsFrame = new JFrame();
+        resultsFrame.setTitle("Wyniki Egzaminów");
+        resultsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        resultsFrame.setSize(450, 300);
+        resultsFrame.setLocationRelativeTo(null);
+        resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
+        resultsFrame.add(resultsPanel);
+        resultsFrame.setVisible(true);
     }
 
     private static Color calculateBarColor(int progress){
