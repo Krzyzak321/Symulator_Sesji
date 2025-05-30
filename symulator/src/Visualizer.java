@@ -30,6 +30,7 @@ public class Visualizer{
         this.numberOfCharts = listOfSubjects.size();
         this.currentDay=1;
         this.currentTime=10;
+        student.setVisualizer(this);
 
         for ( Subject subject : listOfSubjects ) addChart(subject);
     }
@@ -179,36 +180,15 @@ public class Visualizer{
     }
 
     public void updateMotivation(int motivation){
+
         motivationBar.setValue(motivation);
+        motivationBar.setForeground(calculateBarColor(motivation));
         motivationPanel.revalidate();
         motivationPanel.repaint();
     }
 
-    //for int
-    public static int calculateGreen(int studiedTime, int requiredTime){
-        return (int)(((double)studiedTime/(double)requiredTime)*255);
-    }
-
-    //for double
-    public static int calculateGreen(double studiedTime, double requiredTime){
-        int color = (int)((studiedTime/requiredTime)*255);
-        if(color>255)return 255;
-        return color;
-    }
-
-    public static int calculateHeight(int numberOfCharts){
-        double rows = (double)numberOfCharts /3;
-        int realRows = (int)Math.ceil(rows);
-        return 261*realRows;
-    }
-
-    public static int calculateWindowWidth(int numberOfCharts){
-        if(numberOfCharts<3) return (numberOfCharts*260);
-        return 780;
-    }
-
     public void insertPlan(Plan plan) {
-        panelPlan.setPreferredSize(new Dimension(300, ExamSimulator.days*100));
+        panelPlan.setPreferredSize(new Dimension(300, ExamSimulator.days*105));
 
         for (int day = 1; day <= ExamSimulator.days; day++) {
             String dayName="Dzień " + day + ":";
@@ -228,6 +208,34 @@ public class Visualizer{
         }
         panelPlan.revalidate();
         panelPlan.repaint();
+    }
+
+    private static Color calculateBarColor(int progress){
+        int color = (int)(((double)progress/200)*235);
+        return new Color(color, 0, 235);
+    }
+
+    //for int
+    private static int calculateGreen(int studiedTime, int requiredTime){
+        return (int)(((double)studiedTime/(double)requiredTime)*255);
+    }
+
+    //for double
+    private static int calculateGreen(double studiedTime, double requiredTime){
+        int color = (int)((studiedTime/requiredTime)*255);
+        if(color>255)return 255;
+        return color;
+    }
+
+    private static int calculateHeight(int numberOfCharts){
+        double rows = (double)numberOfCharts /3;
+        int realRows = (int)Math.ceil(rows);
+        return 261*realRows;
+    }
+
+    private static int calculateWindowWidth(int numberOfCharts){
+        if(numberOfCharts<3) return (numberOfCharts*260);
+        return 780;
     }
 
 }

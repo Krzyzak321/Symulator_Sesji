@@ -9,6 +9,8 @@ public class Student {
     private List<Subject> subjects;
     private List<StudyEvent> history;
     private List<ExamResult> wyniki;
+    private Visualizer visualizer;
+
     Student(String name, List<Subject> subjects, int mode, int days) {
         this.name = name;
         this.subjects = subjects;
@@ -55,10 +57,13 @@ public class Student {
     public void setMotivation(int motivation) {
         if (motivation > 200) {
             this.motivation = 200;
+            protectedUpdate(visualizer, 200);
         } else if (motivation < 0) {
             this.motivation = 0;
+            protectedUpdate(visualizer, 0);
         } else {
             this.motivation = motivation;
+            protectedUpdate(visualizer, motivation);
         }
     }
 
@@ -72,5 +77,15 @@ public class Student {
 
     public List<StudyEvent> getHistory() {
         return history;
+    }
+
+    public void setVisualizer(Visualizer visualizer) {
+        this.visualizer = visualizer;
+    }
+
+    private void protectedUpdate(Visualizer vis, int motivation){
+        if (vis != null) {
+            vis.updateMotivation(motivation);
+        }
     }
 }
