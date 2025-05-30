@@ -3,8 +3,8 @@ TODO – Symulator Sesji
 1.Walidacja danych wejściowych (ECTS, dni, predyspozycje itp.)
 2.Obsługa wyjątków i zabezpieczenie przed błędami
 3.Ulepszyć algorytm planowania nauki (każdy przedmiot uwzględniony, info gdy za mało czasu)
-4.Nie planować nauki dla już zaliczonych przedmiotów
-5.Dodać raport: ile godzin zaplanowano na każdy przedmiot, ile brakuje ?
+4.Nie planować nauki dla już zaliczonych przedmiotów (done)
+5.Dodać raport: ile godzin zaplanowano na każdy przedmiot, ile brakuje (nwm czy potzrebne)
 6.Aktualizacja planu po wcześniejszym zaliczeniu przedmiotu (modyfikacja o wcześniej ukończony przedmiot)
 
-7.Zrobić żeby wyniki egzaminów były w % i nie mogły być wieksze niz 100 i mniejsze niz 0
+7.Zrobić żeby wyniki egzaminów były w % i nie mogły być wieksze niz 100 i mniejsze niz 0 (done)

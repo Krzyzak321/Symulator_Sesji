@@ -216,7 +216,7 @@ public class Visualizer{
     }
 
     public void updateResults(ExamResult result){
-        JLabel text = new JLabel(String.valueOf(result));
+        JLabel text = new JLabel(String.valueOf(result)+ " %");
         text.setFont(new Font("Arial", Font.PLAIN, 18));
         resultsPanel.add(text);
     }
