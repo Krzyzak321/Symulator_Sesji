@@ -13,6 +13,8 @@ public class Visualizer{
     JFrame frame;
     JPanel panel;
     JPanel panelPlan;
+    JPanel motivationPanel;
+    JProgressBar motivationBar;
     JLabel dayLabel;
     int numberOfCharts;
     public List<Subject> listOfSubjects;
@@ -38,7 +40,7 @@ public class Visualizer{
 
         frame.setTitle("Symulator Sesji");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(width+400, height+100);
+        frame.setSize(width+400, height+160);
         frame.setLocationRelativeTo(null);
 
 
@@ -99,9 +101,34 @@ public class Visualizer{
 
         //-----------------------------------//
 
+        //Panel z Motywacją---------------------//
+        motivationPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        motivationPanel.setBorder(BorderFactory.createLineBorder(Color.yellow));
+        motivationPanel.setPreferredSize(new Dimension(width, 70));
+        motivationPanel.setLayout(new BoxLayout(motivationPanel, BoxLayout.Y_AXIS));
+
+
+        JLabel motivationLabel = new JLabel("Motywacja do Nauki");
+        motivationLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        motivationBar = new JProgressBar(0, 200);
+        motivationBar.setValue(75);
+        motivationBar.setForeground(Color.magenta);
+        motivationBar.setStringPainted(true);
+        motivationPanel.add(motivationLabel);
+        motivationPanel.add(motivationBar);
+
+
+        JPanel outerPanel4 = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        outerPanel4.add(motivationPanel);
+
+        //-----------------------------------//
+
+
+
         frame.add(outerPanel3,BorderLayout.NORTH);
         frame.add(scrollPane, BorderLayout.WEST);
         frame.add(scrollPane2, BorderLayout.EAST);
+        frame.add(outerPanel4, BorderLayout.SOUTH);
         frame.setVisible(true);
     }
 
@@ -149,6 +176,12 @@ public class Visualizer{
         panel.revalidate();
         panel.repaint();
 
+    }
+
+    public void updateMotivation(int motivation){
+        motivationBar.setValue(motivation);
+        motivationPanel.revalidate();
+        motivationPanel.repaint();
     }
 
     //for int
