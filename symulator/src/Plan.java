@@ -43,23 +43,24 @@ public class Plan {
         }
     }
 
-    private void generateAllEveryDay(List<Subject> subjects, int days) {
-        int totalRequired = countTotalRequired(subjects);
-//        int hoursPerDay = Math.min(8, (int) Math.ceil((double) totalRequired / days));
-        for (int day = 1; day <= days; day++) {
-            Map<Subject, Integer> dayPlan = new LinkedHashMap<>();
-            int hoursLeft = 8;
-            for (Subject subject : subjects) {
-                int toStudy = Math.min(subject.getRequiredTime() / days, hoursLeft);
-                if (toStudy > 0) {
-                    dayPlan.put(subject, toStudy);
-                    hoursLeft -= toStudy;
-                }
-                if (hoursLeft == 0) break;
-            }
-            schedule.put(day, dayPlan);
-        }
-        //        for (Subject subject : subjects) {
+//    private void generateAllEveryDay(List<Subject> subjects, int days) {
+//        int totalRequired = countTotalRequired(subjects);
+//////        int hoursPerDay = Math.min(8, (int) Math.ceil((double) totalRequired / days));
+////        for (int day = 1; day <= days; day++) {
+////            Map<Subject, Integer> dayPlan = new LinkedHashMap<>();
+////            int hoursLeft = 8;
+////            for (Subject subject : subjects) {
+////                int toStudy = Math.min(subject.getRequiredTime() / days, hoursLeft);
+////                if (toStudy > 0) {
+////                    dayPlan.put(subject, toStudy);
+////                    hoursLeft -= toStudy;
+////                }
+////                if (hoursLeft == 0) break;
+////            }
+////            schedule.put(day, dayPlan);
+////        }
+//
+//                for (Subject subject : subjects) {
 //            int required = subject.getRequiredTime();
 //            int hoursPerDay = required / days;
 //            int extraHours = required % days;
@@ -70,8 +71,36 @@ public class Plan {
 //                schedule.get(day).put(subject, hours);
 //            }
 //        }
+//    }
+private void generateAllEveryDay(List<Subject> subjects, int days) {
+    int maxHoursPerDay = 8;
+    for (int day = 1; day <= days; day++) {
+        schedule.put(day, new LinkedHashMap<>());
     }
 
+    // Dla każdego przedmiotu rozdziel godziny po dniach
+    for (Subject subject : subjects) {
+        int required = subject.getRequiredTime();
+        int hoursPerDay = required / days;
+        int extraHours = required % days;
+
+        for (int day = 1; day <= days; day++) {
+            int hours = hoursPerDay;
+            if (day <= extraHours) hours++;
+
+            // ile już zaplanowano na ten dzień
+            int alreadyPlanned = 0;
+            for (int value : schedule.get(day).values()) {
+                alreadyPlanned += value;
+            }
+            // przekroczy limit, usuń nadmiar
+            int canAssign = Math.min(hours, maxHoursPerDay - alreadyPlanned);
+            if (canAssign > 0) {
+                schedule.get(day).put(subject, canAssign);
+            }
+        }
+    }
+}
     private void generateOneAtATime(List<Subject> subjects, int days) {
 //        for (int day = 1; day <= days; day++) {
 //            schedule.put(day, new HashMap<>());
