@@ -64,7 +64,7 @@ public class Subject {
 //        return difficulty;
 //    }
     public int getRequiredTime() {
-        return requiredTime;
+        return (int)(requiredTime-studiedTime);
     }
     public double getStudiedTime() {
         return studiedTime;

@@ -154,4 +154,5 @@ private void generateAllEveryDay(List<Subject> subjects, int days) {
         }
         return totalRequired;
     }
+    public Map<Integer, Map<Subject, Integer>> getSchedule() {return schedule;}
 }
