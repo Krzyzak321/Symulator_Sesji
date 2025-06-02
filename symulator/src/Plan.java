@@ -26,7 +26,9 @@ public class Plan {
      * uważem ze to całkiem niezłe bo można dzięki temu rozbudowac troche bardziej motywacje
      */
     public void generate(List<Subject> subjects, int totalDays, int mode) {
-
+        for(Subject subject : subjects) {
+            if(subject.isReady()) subjects.remove(subject);
+        }
         this.days = totalDays;
         schedule.clear();
         for (int day = 1; day <= days; day++) {
@@ -74,9 +76,9 @@ public class Plan {
 //    }
 private void generateAllEveryDay(List<Subject> subjects, int days) {
     int maxHoursPerDay = 8;
-    for (int day = 1; day <= days; day++) {
-        schedule.put(day, new LinkedHashMap<>());
-    }
+//    for (int day = 1; day <= days; day++) {
+//        schedule.put(day, new LinkedHashMap<>());
+//    }
 
     // Dla każdego przedmiotu rozdziel godziny po dniach
     for (Subject subject : subjects) {
@@ -152,4 +154,5 @@ private void generateAllEveryDay(List<Subject> subjects, int days) {
         }
         return totalRequired;
     }
+    public Map<Integer, Map<Subject, Integer>> getSchedule() {return schedule;}
 }

@@ -70,7 +70,7 @@ public class Student {
     public Plan getPlan() {
         return plan;
     }
-
+    public void setPlan(Plan plan) {this.plan = plan;}
     public List<Subject> getSubjects() {
         return subjects;
     }
