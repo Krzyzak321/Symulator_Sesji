@@ -59,7 +59,7 @@ public class ExamSimulator {
                             if (freeHours <= 0) break;
                         }
 
-                        // --- POCZĄTEK: ROZDZIELANIE GODZIN W PRZYSZŁYCH DNIACH ---
+                        //  ROZDZIELANIE GODZIN W PRZYSZŁYCH DNIACH
                         for (int futureDay = day + 1; futureDay <= days; futureDay++) {
                             Map<Subject, Integer> planForDay = student.getPlan().getDailyPlan(futureDay);
                             if (planForDay != null && planForDay.containsKey(subject)) {
@@ -100,7 +100,7 @@ public class ExamSimulator {
 //                        Plan newPlan = new Plan(days-day, newSubjectList, 0); // lub inny tryb
 //                        // Skopiuj stare dni do newPlan
 //                        for (int d = 1; d < day; d++) {
-//                            newPlan.getSchedule().put(d, student.getPlan().getDailyPlan(d)); // jeśli plan.schedule jest publiczny/protected
+//                            newPlan.getSchedule().put(d, student.getPlan().getDailyPlan(d));
 //                        }
 //                        student.setPlan(newPlan);
 //
