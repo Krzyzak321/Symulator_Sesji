@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 
 public class Plan {
@@ -17,7 +18,32 @@ public class Plan {
         this.days = days;
         this.schedule = schedule;
     } // jak gotowy harmonorgram
-
+    //z pliku
+    public Plan(String filename) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            int day = 1;
+            while ((line = reader.readLine()) != null) {
+                Map<Subject, Integer> dayMap = new LinkedHashMap<>();
+                if (!line.trim().isEmpty()) {
+                    String[] entries = line.split(";");
+                    for (String entry : entries) {
+                        String[] parts = entry.split(":");
+                        if (parts.length == 4) {
+                            String subjectName = parts[0].trim();
+                            int hours = Integer.parseInt(parts[1].trim());
+                            int ects = Integer.parseInt(parts[2].trim());
+                            int predyspozycje = Integer.parseInt(parts[3].trim());
+                            Subject subject = new Subject(subjectName, ects, predyspozycje);
+                            dayMap.put(subject, hours);
+                        }
+                    }
+                }
+                schedule.put(day, dayMap);
+                day++;
+            }
+        }
+    }
     /*
      * Generuje plan nauki według wybranego trybu.
      *  subjects lista przedmiotów
@@ -155,4 +181,25 @@ private void generateAllEveryDay(List<Subject> subjects, int days) {
         return totalRequired;
     }
     public Map<Integer, Map<Subject, Integer>> getSchedule() {return schedule;}
+
+    public void exportTxt(String filename) throws IOException {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+            for (int day = 1; day <= days; day++) {
+                Map<Subject, Integer> dayMap = schedule.get(day);
+                if (dayMap == null || dayMap.isEmpty()) {
+                    writer.println();
+                    continue;
+                }
+                boolean pierwszy = true;
+                for (Map.Entry<Subject, Integer> entry : dayMap.entrySet()) {
+                    Subject subj = entry.getKey();
+                    int hours = entry.getValue();
+                    if (!pierwszy) writer.print(";");
+                    writer.printf("%s:%d:%d:%s", subj.getName(), hours, subj.getEcts(), subj.getPredispositions());
+                    pierwszy = false;
+                }
+                writer.println();
+            }
+        }
+    }
 }
