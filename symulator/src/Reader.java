@@ -42,8 +42,8 @@ public class Reader {
         outerPanel.add(new JLabel("Subject Name:"));
         outerPanel.add(subName);
 
-        JSpinner ectsA = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1));
-        JSpinner predisA = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
+        JSpinner ectsA = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
+        JSpinner predisA = new JSpinner(new SpinnerNumberModel(50, 0, 100, 1));
         JSpinner studiedA = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
 
         JPanel ectsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));

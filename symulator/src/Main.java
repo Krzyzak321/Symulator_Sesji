@@ -1,13 +1,14 @@
 import javax.swing.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Ustawiamy liczbę dni symulacji
         int days = 15;
-
+        new Reader();
         // Tworzymy przedmioty
         List<Subject> subjects = new ArrayList<>();
         subjects.add(new Subject("Matematyka", 6, 70, 2));
@@ -39,7 +40,7 @@ public class Main {
         int failedEcts = ExamResult.sumFailedEcts(results);
         System.out.println("Suma ECTS za niezdane przedmioty: " + failedEcts);
         student.visualizer.updateResults("Suma ECTS za niezdane przedmioty: " + failedEcts);
-
+//        student.getPlan().exportTxt("Siema.txt");
         //  historia nauki
 //        System.out.println("\nHISTORIA NAUKI:");
 //        for (StudyEvent event : student.getHistory()) {
