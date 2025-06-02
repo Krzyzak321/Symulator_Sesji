@@ -26,7 +26,7 @@ public class Reader {
         });
 
         frame.setTitle("Student Adder");
-        frame.setSize(500, 660);
+        frame.setSize(600, 700);
         frame.setLocationRelativeTo(null);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
