@@ -8,3 +8,5 @@ TODO – Symulator Sesji
 6.Aktualizacja planu po wcześniejszym zaliczeniu przedmiotu (modyfikacja o wcześniej ukończony przedmiot)
 (zrobiłem troche inaczej plan sie nie aktualizuje tylko przedmiot sie usuwa z planu i godziny są rozdawane pomiedzy przedmioty niestety musi byc okresloan liczba godzin dzniwo)
 7.Zrobić żeby wyniki egzaminów były w % i nie mogły być wieksze niz 100 i mniejsze niz 0 (done)
+
+8. w Readerze zamienic zeby nie byl pol polski pol angielski, i dac sensowna nazwe okienka bo nie wiem
