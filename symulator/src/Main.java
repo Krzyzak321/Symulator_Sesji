@@ -7,16 +7,17 @@ public class Main {
     public static void main(String[] args) {
         // Ustawiamy liczbę dni symulacji
         int days = 15;
-
+        Reader data = new Reader();
+        Student student = new Student("Janek", data.getSubjects(), data.getMode(), data.getDays());
         // Tworzymy przedmioty
-        List<Subject> subjects = new ArrayList<>();
-        subjects.add(new Subject("Matematyka", 6, 70, 2));
-        subjects.add(new Subject("Fizyka", 5, 60, 10));
-        subjects.add(new Subject("Historia", 2, 80));
-        subjects.add(new Subject("Programowanie", 4, 50, 15));
+//        List<Subject> subjects = new ArrayList<>();
+//        subjects.add(new Subject("Matematyka", 6, 70, 2));
+//        subjects.add(new Subject("Fizyka", 5, 60, 10));
+//        subjects.add(new Subject("Historia", 2, 80));
+//        subjects.add(new Subject("Programowanie", 4, 50, 15));
 
         // Tworzymy studenta
-        Student student = new Student("Janek", subjects, 0, days); // tryb 0 = wszystkie codziennie
+//        Student student = new Student("Janek", subjects, 0, days); // tryb 0 = wszystkie codziennie
 
         // Tworzymy motywatory
         List<Motivator> motivators = new ArrayList<>();
@@ -28,7 +29,7 @@ public class Main {
         simulator.run();
         student.getPlan().printPlan();
         // Wyświetlamy wyniki egzaminów
-        List<ExamResult> results = student.takeExams(subjects);
+        List<ExamResult> results = student.takeExams(student.getSubjects());
         System.out.println("\nWYNIKI EGZAMINÓW:");
         for (ExamResult result : results) {
             System.out.println(result);

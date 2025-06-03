@@ -10,7 +10,7 @@ public class Plan {
     Plan(int days, List<Subject> subjects, int mode) {
         this.days = days;
         this.schedule = new HashMap<>();
-        subjects = SubjectSorter.sortSubjects(subjects);
+//        subjects = SubjectSorter.sortSubjects(subjects);
         generate(subjects,days,mode);
     }
     public Plan(int days, Map<Integer, Map<Subject, Integer>> schedule) {
@@ -97,8 +97,12 @@ private void generateAllEveryDay(List<Subject> subjects, int days) {
             }
             // przekroczy limit, usuń nadmiar
             int canAssign = Math.min(hours, maxHoursPerDay - alreadyPlanned);
+
             if (canAssign > 0) {
                 schedule.get(day).put(subject, canAssign);
+            } else {
+                extraHours -= canAssign;
+                schedule.get(day).put(subject, maxHoursPerDay);
             }
         }
     }

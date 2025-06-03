@@ -4,6 +4,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.*;
 import java.util.List;
 
@@ -19,13 +20,17 @@ public class Reader {
         JPanel panel = new JPanel();
         subjectList = new ArrayList<>();
 
+        ImageIcon icon = new ImageIcon(Reader.class.getResource("/images/icon.jpg"));
+        frame.setIconImage(icon.getImage());
+
+
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
         });
 
-        frame.setTitle("Student Adder");
+        frame.setTitle("Odczyt Parametrów Wejściowych");
         frame.setSize(500, 660);
         frame.setLocationRelativeTo(null);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -39,7 +44,7 @@ public class Reader {
         subName.setLineWrap(true);
         JPanel outerPanel = new JPanel();
         outerPanel.setSize(100, 20);
-        outerPanel.add(new JLabel("Subject Name:"));
+        outerPanel.add(new JLabel("Nazwa Przedmiotu:"));
         outerPanel.add(subName);
 
         JSpinner ectsA = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1));
@@ -53,15 +58,15 @@ public class Reader {
 
         JPanel predisPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         predisPanel.setSize(20, 20);
-        predisPanel.add(new JLabel("Predispositions: "));
+        predisPanel.add(new JLabel("Predyspozycje: "));
         predisPanel.add(predisA);
 
         JPanel studiedPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         studiedPanel.setSize(20, 20);
-        studiedPanel.add(new JLabel("StudiedTime: "));
+        studiedPanel.add(new JLabel("Czas już spędzony na nauce: "));
         studiedPanel.add(studiedA);
 
-        DefaultTableModel model = new DefaultTableModel(new Object[]{"Subject","ECTS","Predispositions","StudiedTime"},0);
+        DefaultTableModel model = new DefaultTableModel(new Object[]{"Przedmiot","ECTS","Predyspozycje","Nauczony Czas"},0);
         JTable table = new JTable(model);
         JScrollPane tablePanel = new JScrollPane(table);
         tablePanel.setPreferredSize(new Dimension(350, 200));
@@ -105,7 +110,7 @@ public class Reader {
 
         JPanel daysPanel = new JPanel();
         daysPanel.setLayout(new BoxLayout(daysPanel, BoxLayout.Y_AXIS));
-        JLabel daysLabel = new JLabel("Days:");
+        JLabel daysLabel = new JLabel("Dni do sesji");
         daysLabel.setFont(new Font("Arial", Font.BOLD, 20));
         JSpinner daysInput = new JSpinner(new SpinnerNumberModel(1, 1, 1000, 1));
 
@@ -120,7 +125,7 @@ public class Reader {
 
         JPanel modePanel = new JPanel();
         modePanel.setLayout(new BoxLayout(modePanel, BoxLayout.Y_AXIS));
-        JLabel modeLabel = new JLabel("Mode:");
+        JLabel modeLabel = new JLabel("Tryb Nauki:");
         modeLabel.setFont(new Font("Arial", Font.BOLD, 20));
 
         JRadioButton option1 = new JRadioButton("Nauka wielu przedmiotów jednego dnia");
