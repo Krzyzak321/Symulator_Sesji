@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     public static void main(String[] args) {
         // Ustawiamy liczbę dni symulacji
-        int days = 15;
         Reader data = new Reader();
         Student student = new Student("Janek", data.getSubjects(), data.getMode(), data.getDays());
         // Tworzymy przedmioty
@@ -25,7 +24,7 @@ public class Main {
         motivators.add(new Procrastination());
 
         // Uruchamiamy symulator
-        ExamSimulator simulator = new ExamSimulator(student, motivators, days);
+        ExamSimulator simulator = new ExamSimulator(student, motivators, data.getDays());
         simulator.run();
         student.getPlan().printPlan();
         // Wyświetlamy wyniki egzaminów
