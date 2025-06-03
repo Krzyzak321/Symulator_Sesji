@@ -2,8 +2,8 @@
 
 [*] --> Przygotowanie
 
-Przygotowanie --> Sortowanie : subjects != null
-Sortowanie --> Planowanie : plan == null
+Przygotowanie --> Sortowanie : jeśli subjects != null
+Sortowanie --> Planowanie : jeśli plan == null
 Planowanie --> Nauka : dzień = 1
 
 Nauka --> MotywacjaSpada : motivation < próg

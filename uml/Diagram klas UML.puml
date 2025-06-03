@@ -1,4 +1,6 @@
 @startuml
+
+' ===== INTERFEJSY I MOTYWATORY =====
 interface Motivator {
     +apply(student: Student): void
     +getName(): String
@@ -17,78 +19,100 @@ class Procrastination implements Motivator {
 Motivator <|-- CoffeeBreak
 Motivator <|-- Procrastination
 
+' ===== PRZEDMIOT =====
 class Subject {
     -name: String
     -predispositions: int
     -requiredTime: int
-    -studiedTime: int
+    -studiedTime: double
     -ects: int
-    +study(hours: int): void
+    +study(hours: double): void
     +isReady(): boolean
     +getProgress(): double
     +getName(): String
-    +getDifficulty(): int
+    +getRequiredTime(): int
+    +getStudiedTime(): double
+    +getEcts(): int
     +getPredispositions(): int
 }
 
+' ===== SORTOWANIE PRZEDMIOTÓW =====
 class SubjectSorter {
     +sortSubjects(subjects: List<Subject>): List<Subject>
 }
 
+' ===== ZDARZENIE NAUKI =====
 class StudyEvent {
     -subject: Subject
     -hours: int
     -day: int
+    -motivation: int
     +getDescription(): String
 }
 
+' ===== PLAN =====
 class Plan {
     -days: int
     -schedule: Map<Integer, Map<Subject, Integer>>
-    +generate(subjects: List<Subject>, totalDays: int): void
+    +generate(subjects: List<Subject>, totalDays: int, mode: int): void
     +getDailyPlan(day: int): Map<Subject, Integer>
+    +printPlan(): void
+    +getSchedule(): Map<Integer, Map<Subject, Integer>>
 }
 
+' ===== WYNIK EGZAMINU =====
 class ExamResult {
     -subject: Subject
-    -score: int
+    -score: double
     -passed: boolean
     +isPassed(): boolean
     +getGrade(): String
     +getSubjectName(): String
+    +getScore(): double
+    +toString(): String
 }
 
+' ===== STUDENT =====
 class Student {
     -name: String
     -motivation: int
     -plan: Plan
     -subjects: List<Subject>
     -history: List<StudyEvent>
-    +study(day: int): void
-    +takeExams(): List<ExamResult>
+    -wyniki: List<ExamResult>
+    -visualizer: Visualizer
+    +study(subject: Subject, hours: int, day: int): void
+    +takeExams(subjects: List<Subject>): List<ExamResult>
     +applyMotivator(m: Motivator): void
     +getMotivation(): int
     +setMotivation(motivation: int): void
     +getPlan(): Plan
     +getSubjects(): List<Subject>
     +getHistory(): List<StudyEvent>
+    +setVisualizer(Visualizer): void
+    +getVisualizer(): Visualizer
+    +getExamResults(): List<ExamResult>
 }
 
-class ExamSimulator {
-    -student: Student
-    -motivators: List<Motivator>
-    -days: int
-    +run(): void
+' ===== WIZUALIZATOR =====
+class Visualizer {
+    +Visualizer()
+    +visualizePlan(plan: Plan): void
+    +visualizeProgress(student: Student): void
+    +visualizeResults(student: Student): void
 }
 
-ExamSimulator --> Student
-ExamSimulator --> Motivator
+' ===== RELACJE =====
 Student --> Plan
 Student --> Subject
 Student --> StudyEvent
-ExamResult --> Subject
-StudyEvent --> Subject
+Student --> ExamResult
+Student --> Visualizer
 Plan --> Subject
 Plan --> SubjectSorter
+StudyEvent --> Subject
+ExamResult --> Subject
+Visualizer ..> Plan
+Visualizer ..> Student
 
 @enduml

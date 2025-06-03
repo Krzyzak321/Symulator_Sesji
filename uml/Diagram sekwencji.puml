@@ -1,13 +1,23 @@
 @startuml
 actor User
+participant "Main" as Main
+participant "Reader" as R
 participant "Student" as S
 participant "Plan" as P
 participant "SubjectSorter" as SS
 participant "Subject" as Subj
 participant "StudyEvent" as SE
 participant "Motivator" as M
+participant "Visualizer" as V
 
-User -> S : startStudy(day)
+User -> Main : uruchamia program
+
+Main -> R : readStudent(path)
+R --> Main : Student
+Main -> S : setVisualizer(V)
+Main -> S : setPlan(P)
+
+User -> S : rozpocznij naukę
 
 S -> SS : sortSubjects(subjects)
 SS --> S : sortedSubjects
@@ -20,8 +30,11 @@ loop dla każdego przedmiotu
     S -> SE : add to history
 end
 
-S -> M : apply()
+S -> M : applyMotivator()
 M --> S : adjustMotivation()
+
+S -> V : visualizeProgress(this)
+V --> S
 
 note right of S
 Dzień zakończony

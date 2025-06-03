@@ -2,20 +2,24 @@
 
 object student1 {
   - imię: "Jan Kowalski"
-  - motywacja: 70
+  - motywacja: 100
   - plan: Plan
   - przedmioty: [Matematyka, Programowanie]
+  - historia: [StudyEvent]
+  - wyniki: [ExamResult]
+  - visualizer: Visualizer
 }
 
 object subject1 {
-  - nazwa: "Matematyka dyskretna"
-  - ects: 5
-  - wymagany czas: 20
-  - przerobiony czas: 12
-  - predyspozycje: 10
+  - nazwa: "Matematyka"
+  - ects: 6
+  - wymagany czas: 70
+  - przerobiony czas: 2
+  - predyspozycje: 70
 }
+
 object Plan{
-  - dni: 7
+  - dni: 15
   - rozkład: {1: {Matematyka: 2}, 2: {Programowanie: 3}, ...}
 }
 
@@ -23,17 +27,28 @@ object StudyEvent {
   - dzień: 1
   - przedmiot: Matematyka
   - godziny: 2
+  - motywacja: 100
 }
 
-object SymulatorSesji {
-  - student: Jan Kowalski
-  - motywatory: [Przerwa, Rozpraszacz]
+object ExamResult {
+  - przedmiot: Matematyka
+  - wynik: 80
+  - zdany: true
 }
+
+object Visualizer {
+
+ }
+object Reader {
+
+ }
 
 student1 --> Plan
 Plan --> subject1
 StudyEvent --> subject1
 student1 --> StudyEvent
-SymulatorSesji --> student1
+student1 --> ExamResult
+student1 --> Visualizer
+student1 --> Reader
 
 @enduml
