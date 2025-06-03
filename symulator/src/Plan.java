@@ -43,6 +43,16 @@ public class Plan {
         } else if (mode == 1) {
             generateOneAtATime(subjects, totalDays);
         }
+        List<Integer> toRemove = new ArrayList<>();
+        for (var entry : schedule.entrySet()) {
+            if (entry.getValue().isEmpty()) {
+                toRemove.add(entry.getKey());
+            }
+        }
+        // Usuń dni w kórych nc nei ma
+        for (Integer day : toRemove) {
+            schedule.remove(day);
+        }
     }
 
 //    private void generateAllEveryDay(List<Subject> subjects, int days) {
@@ -100,9 +110,6 @@ private void generateAllEveryDay(List<Subject> subjects, int days) {
 
             if (canAssign > 0) {
                 schedule.get(day).put(subject, canAssign);
-            } else {
-                extraHours -= canAssign;
-                schedule.get(day).put(subject, maxHoursPerDay);
             }
         }
     }

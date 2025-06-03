@@ -39,8 +39,8 @@ public class Visualizer{
         result.setFont(new Font("Serif", Font.BOLD, 25));
         resultsPanel.add(result);
 
-        ImageIcon icon = new ImageIcon(Reader.class.getResource("/images/icon.jpg"));
-        frame.setIconImage(icon.getImage());
+//
+
     }
 
     public void visualize(){

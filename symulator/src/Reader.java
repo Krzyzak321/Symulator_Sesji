@@ -20,8 +20,8 @@ public class Reader {
         JPanel panel = new JPanel();
         subjectList = new ArrayList<>();
 
-        ImageIcon icon = new ImageIcon(Reader.class.getResource("/images/icon.jpg"));
-        frame.setIconImage(icon.getImage());
+//        ImageIcon icon = new ImageIcon(Reader.class.getResource("./images/icon.jpg"));
+//        frame.setIconImage(icon.getImage());
 
 
         frame.addWindowListener(new WindowAdapter() {
