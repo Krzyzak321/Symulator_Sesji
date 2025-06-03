@@ -15,29 +15,15 @@ public class Student {
         this.name = name;
         this.subjects = subjects;
         this.history = new ArrayList<>();
-//        int days = ExamSimulator.getda;
-        this.plan = new Plan(days, subjects, mode);
+        this.plan = new Plan(days, subjects, mode); //stworzenie planu nauki
         this.motivation = 100;
-//        int days = ExamSimulator.days;
-//        Plan plan = new Plan(days, subjects, mode);
-        //kurcze co ja robie
+
     }
     public void study(Subject subject, int hours, int day) {
-
-        //        if (plan == null) return;
-//        motivation = 100;
-//        Map<Subject, Integer> dailyPlan = plan.getDailyPlan(day);
-//        for (Map.Entry<Subject, Integer> entry : dailyPlan.entrySet()) {
-//            Subject subject = entry.getKey();
-//            int hours = entry.getValue();
-//            for (int i = 0; i < hours; i++) {
-//                motivation -= 1;// odejmuj 10 za każdą godzinę
-//            }
             StudyEvent study = new StudyEvent(subject, hours, day, motivation);
-            history.add(study);
-//        }
+            history.add(study); //dodanie okresu nauki do historii nauki
     }
-
+    // podjęcie sie egzaminów z wszystkich przedmiotów
     public List<ExamResult> takeExams(List<Subject> subjects) {
         wyniki = new ArrayList<>();
         for (Subject subject : subjects) {
@@ -45,7 +31,7 @@ public class Student {
         }
         return wyniki;
     }
-
+    //zmiana motywacji w zależnoći od motywatora
     public void applyMotivator(Motivator m) {
         m.apply(this);
     }

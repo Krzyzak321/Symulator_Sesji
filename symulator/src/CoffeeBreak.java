@@ -9,7 +9,7 @@ public class CoffeeBreak implements Motivator {
         return "Nic sie nie stało";
     }
 }
-
+//na pamiętkę poległego porgramisty (nie zorzumiał zamysłu a kod napisał)
 //public class CoffeeBreak implements Motivator {
 //    private List<Motivator> motivators;
 //    private Random random = new Random();

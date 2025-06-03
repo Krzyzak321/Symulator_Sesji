@@ -10,7 +10,7 @@ public class Plan {
     Plan(int days, List<Subject> subjects, int mode) {
         this.days = days;
         this.schedule = new HashMap<>();
-//        subjects = SubjectSorter.sortSubjects(subjects);
+        subjects = SubjectSorter.sortSubjects(subjects);
         generate(subjects,days,mode);
     }
     public Plan(int days, Map<Integer, Map<Subject, Integer>> schedule) {
@@ -19,11 +19,14 @@ public class Plan {
     } // jak gotowy harmonorgram
 
     /*
-     * Generuje plan nauki według wybranego trybu.
-     *  subjects lista przedmiotów
-     * totalDays liczba dni nauki
-     *  mode 0 = każdy przedmiot codziennie; 1 = po kolei każdy przedmiot do końca
-     * uważem ze to całkiem niezłe bo można dzięki temu rozbudowac troche bardziej motywacje
+     * generate() - Generuje plan nauki według wybranego trybu.
+     *  subjects - lista przedmiotów
+     * totalDays - liczba dni nauki
+     *  mode 0 = każdy przedmiot codziennie
+     * 1 = po kolei każdy przedmiot do końca
+     * z piorytetem nauki tych najważniejszych jak będzi emial czas aby sie nauczyć tylko jednego to tak będzie sie uczył  reszat przedmiotów jest ucinana
+     * i nei ma możliwości jejj nauki lub w ograniczonym stopniu.
+     * dzięki subject sorter przedmioty są posortowane od najwiekszych ects do najmiej oraz w zależlości od predyspozycji do danego przedmiotu
      */
     public void generate(List<Subject> subjects, int totalDays, int mode) {
         for(Subject subject : subjects) {
@@ -43,54 +46,13 @@ public class Plan {
         } else if (mode == 1) {
             generateOneAtATime(subjects, totalDays);
         }
-        List<Integer> toRemove = new ArrayList<>();
-        for (var entry : schedule.entrySet()) {
-            if (entry.getValue().isEmpty()) {
-                toRemove.add(entry.getKey());
-            }
-        }
-        // Usuń dni w kórych nc nei ma
-        for (Integer day : toRemove) {
-            schedule.remove(day);
-        }
+        // Usuń puste dni niestety nie działa
+//        schedule.entrySet().removeIf(entry -> entry.getValue().isEmpty());
     }
 
-//    private void generateAllEveryDay(List<Subject> subjects, int days) {
-//        int totalRequired = countTotalRequired(subjects);
-//////        int hoursPerDay = Math.min(8, (int) Math.ceil((double) totalRequired / days));
-////        for (int day = 1; day <= days; day++) {
-////            Map<Subject, Integer> dayPlan = new LinkedHashMap<>();
-////            int hoursLeft = 8;
-////            for (Subject subject : subjects) {
-////                int toStudy = Math.min(subject.getRequiredTime() / days, hoursLeft);
-////                if (toStudy > 0) {
-////                    dayPlan.put(subject, toStudy);
-////                    hoursLeft -= toStudy;
-////                }
-////                if (hoursLeft == 0) break;
-////            }
-////            schedule.put(day, dayPlan);
-////        }
-//
-//                for (Subject subject : subjects) {
-//            int required = subject.getRequiredTime();
-//            int hoursPerDay = required / days;
-//            int extraHours = required % days;
-//
-//            for (int day = 1; day <= days; day++) {
-//                int hours = hoursPerDay;
-//                if (day <= extraHours) hours++; // dodatkowe godziny rozkładają sie po kolejnych niach
-//                schedule.get(day).put(subject, hours);
-//            }
-//        }
-//    }
 private void generateAllEveryDay(List<Subject> subjects, int days) {
     int maxHoursPerDay = 8;
-//    for (int day = 1; day <= days; day++) {
-//        schedule.put(day, new LinkedHashMap<>());
-//    }
-
-    // Dla każdego przedmiotu rozdziel godziny po dniach
+    // Dla każdego przedmiotu rozdziel godziny po równo na każdy a resztę z dzielenia przechowaja aby pododawać po jednej godzinie w bardziej wolnym dniu
     for (Subject subject : subjects) {
         int required = subject.getRequiredTime();
         int hoursPerDay = required / days;
@@ -111,31 +73,27 @@ private void generateAllEveryDay(List<Subject> subjects, int days) {
             if (canAssign > 0) {
                 schedule.get(day).put(subject, canAssign);
             }
+            //w innym przypadku do następengo dnia i pomija nauke tego przedmiotu w tym dniu
         }
     }
 }
     private void generateOneAtATime(List<Subject> subjects, int days) {
-//        for (int day = 1; day <= days; day++) {
-//            schedule.put(day, new HashMap<>());
-//        }
-
-        int currentDay = 1;
+        int currentDay = 1; //pomocniczo
         int maxHoursPerDay = 8; //  max 8h nauki dziennie
-
+        //iteracja po każdym przedmiocie
         for (Subject subject : subjects) {
             int hoursLeft = subject.getRequiredTime();
-            while (hoursLeft > 0 && currentDay <= days) {
-//                int alreadyPlanned = schedule.get(currentDay).values().stream().mapToInt(Integer::intValue).sum();
-                int alreadyPlanned = 0;
+            while (hoursLeft > 0 && currentDay <= days) { //pętla trwa do momentu wyczepania godzin przedmiotu lub dostępnych dni
+                int alreadyPlanned = 0; //sprawdzenie ile już zostało zaplanowane godzin danego dnia
                 for (int value : schedule.get(currentDay).values()) {
                     alreadyPlanned += value;
                 }
-                int available = maxHoursPerDay - alreadyPlanned;
+                int available = maxHoursPerDay - alreadyPlanned; //dostępne godziny oraz ustala limit godzin na dzień
                 if (available <= 0) {
                     currentDay++;
                     continue;
                 }
-                int hoursToday = Math.min(hoursLeft, available);
+                int hoursToday = Math.min(hoursLeft, available); //sprawdzenei ile przydzielić w tym dniu
                 schedule.get(currentDay).put(subject, hoursToday);
                 hoursLeft -= hoursToday;
                 if (available == hoursToday) {
@@ -148,7 +106,7 @@ private void generateAllEveryDay(List<Subject> subjects, int days) {
     public Map<Subject, Integer> getDailyPlan(int day) {
         return schedule.getOrDefault(day, Collections.emptyMap());
     }
-
+    //wypisanie planu do konsoli
     public void printPlan() {
         for (int day = 1; day <= days; day++) {
             System.out.println("Dzień " + day + ":");
@@ -158,12 +116,13 @@ private void generateAllEveryDay(List<Subject> subjects, int days) {
             }
         }
     }
-    private int countTotalRequired(List<Subject> subjects) {
-        int totalRequired = 0;
-        for (Subject subject : subjects) {
-            totalRequired += subject.getRequiredTime();
-        }
-        return totalRequired;
-    }
+    //było potrzebne od wcześniejszej wersji generowania planu
+    //    private int countTotalRequired(List<Subject> subjects) {
+//        int totalRequired = 0;
+//        for (Subject subject : subjects) {
+//            totalRequired += subject.getRequiredTime();
+//        }
+//        return totalRequired;
+//    }
     public Map<Integer, Map<Subject, Integer>> getSchedule() {return schedule;}
 }

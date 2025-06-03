@@ -31,7 +31,7 @@ public class Reader {
         });
 
         frame.setTitle("Odczyt Parametrów Wejściowych");
-        frame.setSize(500, 660);
+        frame.setSize(660, 700);
         frame.setLocationRelativeTo(null);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 

@@ -17,24 +17,22 @@ public class ExamSimulator {
         Visualizer window = new Visualizer(student);
         window.insertPlan(student.getPlan());
         window.visualize();
-        int bonusMotivation = 0;
-
+        //int bonusMotivation = 0; miał to zostać zastosowane do tego że ktoś sie wcześniej nauczył danego przedmiotu i miał to być dodatkowy zastrzyk motywacji lecz, zrezygnowane i zrobione uaktualnienei planu tak aby jak najwięcej czasu wykorzystać
         for (int day = 1; day <= days; day++) {
             // Pobierz plan na dany dzień
             Map<Subject, Integer> dailyPlan = new LinkedHashMap<>(student.getPlan().getDailyPlan(day));
             List<Subject> subjectsToday = new ArrayList<>(dailyPlan.keySet());
-            student.setMotivation(100+bonusMotivation);
-            bonusMotivation = 0;
-
-
+//            student.setMotivation(100+bonusMotivation);
+//            bonusMotivation = 0;
+            student.setMotivation(100);
+            // iteracaj po kazdym przedmiocie w danym dniu
             for (var subject : subjectsToday) {
                 if(student.getMotivation()<=0){
-                    break;
+                    break;  //kiedy motywacja spadnie do 0 to przerwij naukę bo nic z tego nie wyjdzie
                 }
                 int hours = dailyPlan.get(subject);
                 for (int h = 1; h <= hours; h++) {
-                    // Losowanie motivatora co godzinę
-
+                    // Losowanie motivatora co godzinę i motywacja wpływa an naukę jak ma większą od neutralnej uczy się szybciej a jak mniejszą to wolniej lecz godziny i tak lecą tylko mniej lub bardziej sie nauczy na przedmiot
                     Motivator motivator = motivators.get(random.nextInt(motivators.size()));
                     student.applyMotivator(motivator);
                     if(student.getMotivation()<=0){
@@ -43,8 +41,8 @@ public class ExamSimulator {
 //                    System.out.println("Godzina " + (h+1) + " - zastosowano: " + motivator.getName() +
 //                            ", motywacja: " + student.getMotivation());
                     student.study(subject, 1, day);
-                    System.out.println("Przedmiot: " + subject.getName() + " - postęp: " + subject.getProgress());
-                    if(subject.isReady() && (hours-h)>0) {
+                    System.out.println("Przedmiot: " + subject.getName() + " - postęp: " + subject.getProgress()); //wyśwetlanie postępu nauki
+                    if(subject.isReady() && (hours-h)>0) { //w przypadku jak przedmiot już nauczony lecz pozostały wolne godziny
                         // Rozdziel wolne godziny innym przedmiotom z planu na dziś
                         int freeHours = hours - h;
                         for (Subject other : subjectsToday) {
@@ -82,45 +80,18 @@ public class ExamSimulator {
                         }
                         break;
                     }
-                    //                    if(subject.isReady() && (hours-h)>0){
-//                        Subject doEdycji;
-//                        for (Subject other : dailyPlan.keySet()) {
-//                            if(other.isReady()){continue;}
-//                            else {
-//                        int ile = dailyPlan.get(other);
-//                            dailyPlan.put(other, ile+(hours-h));
-//                            doEdycji = other;
-//                            break;
-//                            }
-//                        }
-//                    var newSubjectList = student.getSubjects();
-//                    newSubjectList.remove(subject);
-//
-//                        // Generuj nowy plan tylko dla pozostałych przedmiotów i dni
-//                        Plan newPlan = new Plan(days-day, newSubjectList, 0); // lub inny tryb
-//                        // Skopiuj stare dni do newPlan
-//                        for (int d = 1; d < day; d++) {
-//                            newPlan.getSchedule().put(d, student.getPlan().getDailyPlan(d));
-//                        }
-//                        student.setPlan(newPlan);
-//
-//
-//                        break;}
+
                     window.updateGraph(subject, 1);
-
-
-
+                    //wielkie spowolneinie kodu 30h symulacja
                     try {
                         TimeUnit.MILLISECONDS.sleep(200);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-        // implementacja kurde to będzie piekło...
+                    //zmniejszenie motywacji co godzinę przez zmęczenie nauką
                     student.setMotivation(student.getMotivation() - 5);
                 }
 
-//                StudyEvent event = new StudyEvent(subject, hours, day, student.getMotivation());
-//                student.getHistory().add(event);
             }
 
         }

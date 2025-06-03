@@ -5,6 +5,7 @@ public class ExamResult {
     private double score;
     private boolean passed;
     private Random rand = new Random();
+    // wyniki egzaminów z przedmiotów oraz uwzględnienei czynników losowych kótre to +-15% wyniku
     ExamResult(Subject subject) {
         int losowosc = rand.nextInt(16)-10;
         this.subject = subject;
@@ -37,6 +38,7 @@ public class ExamResult {
         return "Przedmiot: " + subject.getName() + ", wynik: " + score;
     }
     //metoda do sumowania ECTS dla przedmiotów, które nie zostały zaliczone
+    //suma ects przedmiotów niezdanych
     public static int sumFailedEcts(java.util.List<ExamResult> results) {
         int ectsFailedSum = 0;
         for (ExamResult result : results) {
