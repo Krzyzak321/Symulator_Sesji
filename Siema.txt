@@ -1,0 +1,15 @@
+Matematyka:5:6:70;Fizyka:3:5:60
+Matematyka:5:6:70;Fizyka:3:5:60
+Matematyka:5:6:70;Fizyka:3:5:60
+Matematyka:5:6:70;Fizyka:3:5:60
+Matematyka:5:6:70;Fizyka:3:5:60
+Matematyka:5:6:70;Fizyka:3:5:60
+Matematyka:5:6:70;Fizyka:3:5:60
+Matematyka:5:6:70;Fizyka:3:5:60
+Matematyka:5:6:70;Fizyka:3:5:60
+Matematyka:4:6:70;Programowanie:1:4:50;Fizyka:3:5:60
+Matematyka:4:6:70;Programowanie:1:4:50;Fizyka:3:5:60
+Matematyka:4:6:70;Programowanie:1:4:50;Fizyka:3:5:60
+Matematyka:4:6:70;Programowanie:1:4:50;Fizyka:3:5:60
+Matematyka:4:6:70;Programowanie:1:4:50;Fizyka:3:5:60
+Matematyka:4:6:70;Programowanie:1:4:50;Fizyka:3:5:60
