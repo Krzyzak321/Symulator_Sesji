@@ -88,7 +88,7 @@ public class Reader {
                 model.addRow(new Object[]{name, ects, predis, studied});
                 subName.setText("");
                 ectsA.setValue(0);
-                predisA.setValue(0);
+                predisA.setValue(50);
                 studiedA.setValue(0);
 
                 error.setText("");
