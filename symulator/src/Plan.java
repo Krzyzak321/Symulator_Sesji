@@ -46,6 +46,10 @@ public class Plan {
         } else if (mode == 1) {
             generateOneAtATime(subjects, totalDays);
         }
+        for(int day=1; day<=totalDays; day++) {
+            var dayplan=getDailyPlan(day);
+            if(dayplan.isEmpty()) schedule.remove(Integer.valueOf(day));
+        }
         // Usuń puste dni niestety nie działa
 //        schedule.entrySet().removeIf(entry -> entry.getValue().isEmpty());
     }
