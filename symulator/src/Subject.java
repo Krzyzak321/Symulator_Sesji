@@ -11,6 +11,18 @@ public class Subject {
     public JFreeChart chart;
 
     Subject (String name, int ects, int predispositions, int studiedTime) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nazwa przedmiotu nie może być pusta.");
+        }
+        if (ects <= 0) {
+            throw new IllegalArgumentException("Liczba ECTS musi być dodatnia.");
+        }
+        if (predispositions < 0 || predispositions > 100) {
+            throw new IllegalArgumentException("Predyspozycje muszą być w zakresie 0-100.");
+        }
+        if (studiedTime < 0) {
+            throw new IllegalArgumentException("Czas nauki nie może być ujemny.");
+        }
         this.name = name;
         this.ects = ects;
         if(predispositions<=0){ // w razie złego lub wartości zerowej predyspozycji ustaw na default-ową 50%
@@ -25,6 +37,15 @@ public class Subject {
     }
     // polimorfizm
     Subject (String name, int ects, int predispositions) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nazwa przedmiotu nie może być pusta.");
+        }
+        if (ects <= 0) {
+            throw new IllegalArgumentException("Liczba ECTS musi być dodatnia.");
+        }
+        if (predispositions < 0 || predispositions > 100) {
+            throw new IllegalArgumentException("Predyspozycje muszą być w zakresie 0-100.");
+        }
         this.name = name;
         this.ects = ects;
         if(predispositions<=0){
