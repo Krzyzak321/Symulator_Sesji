@@ -25,7 +25,7 @@ public class Student {
             throw new IllegalArgumentException("Tryb musi być nieujemny.");
         }
         if (days <= 0) {
-            throw new IllegalArgumentException("Liczba dni musi być dodatnia.");
+            throw new IllegalArgumentException("Liczba dni musi być dodatnia.");}
         this.name = name;
         this.subjects = subjects;
         this.history = new ArrayList<>();

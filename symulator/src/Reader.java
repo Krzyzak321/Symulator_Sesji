@@ -106,9 +106,9 @@ public class Reader {
             }
             else {
                 //Pobierz dane z pól
-                int ects = (int) ectsA.getValue();
-                int predis = (int) predisA.getValue();
-                int studied = (int) studiedA.getValue();
+//                int ects = (int) ectsA.getValue();
+//                int predis = (int) predisA.getValue();
+//                int studied = (int) studiedA.getValue();
 
                 //Tworzy przedmiot i dodaje go do listy przedmiotow
                 this.subjectList.add(new Subject(name, ects, predis, studied));

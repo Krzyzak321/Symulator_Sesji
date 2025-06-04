@@ -5,7 +5,7 @@ public class Plan {
     private Map<Integer, Map<Subject, Integer>> schedule ;
     Plan(int days) {
         if (days <= 0) {
-            throw new IllegalArgumentException("Liczba dni musi być większa od 0.");
+            throw new IllegalArgumentException("Liczba dni musi być większa od 0.");}
         this.days = days;
         this.schedule = new HashMap<>();
     }
@@ -19,7 +19,7 @@ public class Plan {
             if (mode < 0) {
                 throw new IllegalArgumentException("Tryb musi być nieujemny.");
             }
-        }
+
         this.days = days;
         this.schedule = new HashMap<>();
         subjects = SubjectSorter.sortSubjects(subjects);

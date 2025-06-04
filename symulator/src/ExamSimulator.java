@@ -93,7 +93,7 @@ public class ExamSimulator {
                         break;
                     }
 
-                    window.updateGraph(subject, 1);
+                    window.updateGraph(subject, 1, day, h);
                     //wielkie spowolneinie kodu 30h symulacja
                     try {
                         TimeUnit.MILLISECONDS.sleep(200);

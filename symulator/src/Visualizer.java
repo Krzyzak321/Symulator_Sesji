@@ -164,7 +164,7 @@ public class Visualizer{
     }
 
     // Aktualizuje wykres i zmienia jego kolor w zaleznosci od stopnia zapelnienia
-    public void updateGraph(Subject subject, double timeStudied){
+    public void updateGraph(Subject subject, double timeStudied, int currentDay, int currentHour){
         double requiredTime = (double)subject.getRequiredTime();
         double currentStudiedTime=(double) subject.dataset.getValue("studiedTime");
         double currentTimeLeft = (double) subject.dataset.getValue("timeLeft");
@@ -179,12 +179,8 @@ public class Visualizer{
         plot.setSectionPaint("studiedTime", new Color(red, green, 0));
 
 
-        this.currentTime++;
-        if(currentTime==19) {
-            this.currentTime=10;
-            this.currentDay++;
-        }
-        this.dayLabel.setText("Dzień "+this.currentDay+" Godzina "+this.currentTime+":00");
+
+        this.dayLabel.setText("Dzień "+currentDay+" Godzina "+1+currentHour+":00");
 
         panel.revalidate();
         panel.repaint();
