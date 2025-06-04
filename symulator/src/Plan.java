@@ -4,16 +4,34 @@ public class Plan {
     private int days;
     private Map<Integer, Map<Subject, Integer>> schedule ;
     Plan(int days) {
+        if (days <= 0) {
+            throw new IllegalArgumentException("Liczba dni musi być większa od 0.");
         this.days = days;
         this.schedule = new HashMap<>();
     }
     Plan(int days, List<Subject> subjects, int mode) {
+            if (days <= 0) {
+                throw new IllegalArgumentException("Liczba dni musi być większa od 0.");
+            }
+            if (subjects == null || subjects.isEmpty()) {
+                throw new IllegalArgumentException("Lista przedmiotów nie może być pusta.");
+            }
+            if (mode < 0) {
+                throw new IllegalArgumentException("Tryb musi być nieujemny.");
+            }
+        }
         this.days = days;
         this.schedule = new HashMap<>();
         subjects = SubjectSorter.sortSubjects(subjects);
         generate(subjects,days,mode);
     }
     public Plan(int days, Map<Integer, Map<Subject, Integer>> schedule) {
+        if (days <= 0) {
+            throw new IllegalArgumentException("Liczba dni musi być większa od 0.");
+        }
+        if (schedule == null) {
+            throw new IllegalArgumentException("Harmonogram nie może być nullem.");
+        }
         this.days = days;
         this.schedule = schedule;
     } // jak gotowy harmonorgram

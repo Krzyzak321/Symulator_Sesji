@@ -43,6 +43,7 @@ public class Visualizer{
 
     }
 
+    // Wyswietla glowne okno z wykresami
     public void visualize(){
         int width = calculateWindowWidth(numberOfCharts);
         int height = calculateHeight(numberOfCharts);
@@ -141,6 +142,8 @@ public class Visualizer{
         frame.setVisible(true);
     }
 
+
+    //Dodaje wykres podanego przedmiotu do okna
     public void addChart(Subject subject){
         String name = subject.getName();
         DefaultPieDataset dataset = subject.dataset;
@@ -160,6 +163,7 @@ public class Visualizer{
         panel.add(chartPanel);
     }
 
+    // Aktualizuje wykres i zmienia jego kolor w zaleznosci od stopnia zapelnienia
     public void updateGraph(Subject subject, double timeStudied){
         double requiredTime = (double)subject.getRequiredTime();
         double currentStudiedTime=(double) subject.dataset.getValue("studiedTime");
@@ -187,6 +191,7 @@ public class Visualizer{
 
     }
 
+    // Aktualizuje pasek motywacji (ustawia jego wartosc na podaną)
     public void updateMotivation(int motivation){
 
         motivationBar.setValue(motivation);
@@ -195,6 +200,7 @@ public class Visualizer{
         motivationPanel.repaint();
     }
 
+    // Tworzy panel z podanym planem nauki
     public void insertPlan(Plan plan) {
         panelPlan.setPreferredSize(new Dimension(300, ExamSimulator.days*105));
 
@@ -218,18 +224,21 @@ public class Visualizer{
         panelPlan.repaint();
     }
 
+    //Dodaje pojedynczy wynik z egzaminu do okna z wynikami
     public void updateResults(ExamResult result){
         JLabel text = new JLabel(String.valueOf(result)+ " %");
         text.setFont(new Font("Arial", Font.PLAIN, 18));
         resultsPanel.add(text);
     }
 
+    //Dodaje tekst do okna z wynikami
     public void updateResults(String result){
         JLabel text = new JLabel(result);
         text.setFont(new Font("Arial", Font.PLAIN, 18));
         resultsPanel.add(text);
     }
 
+    //Wyswietla okno z wynikami egzaminow
     public void showResults(){
         JFrame resultsFrame = new JFrame();
         resultsFrame.setTitle("Wyniki Egzaminów");
@@ -241,29 +250,32 @@ public class Visualizer{
         resultsFrame.setVisible(true);
     }
 
+    //Liczy kolor paska motywacji na podstawie zapelnienia
     private static Color calculateBarColor(int progress){
         int color = (int)(((double)progress/200)*235);
         return new Color(color, 0, 235);
     }
 
-    //for int
+    //Liczy intensywnosc zielenii zapelnienia wykresu, argumentem jest liczba calkowita
     private static int calculateGreen(int studiedTime, int requiredTime){
         return (int)(((double)studiedTime/(double)requiredTime)*255);
     }
 
-    //for double
+    //Liczy intensywnosc zielenii zapelnienia wykresu, argumentem jest liczba zmiennoprzecinkowa
     private static int calculateGreen(double studiedTime, double requiredTime){
         int color = (int)((studiedTime/requiredTime)*255);
         if(color>255)return 255;
         return color;
     }
 
+    //Liczy wysokosc okna na podstawie liczby wykresow
     private static int calculateHeight(int numberOfCharts){
         double rows = (double)numberOfCharts /3;
         int realRows = (int)Math.ceil(rows);
         return 261*realRows;
     }
 
+    //Liczy szerokosc okna na podstawie liczby wykresow
     private static int calculateWindowWidth(int numberOfCharts){
         if(numberOfCharts<3) return (numberOfCharts*260);
         return 780;

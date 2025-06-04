@@ -9,4 +9,4 @@ TODO – Symulator Sesji
 (zrobiłem troche inaczej plan sie nie aktualizuje tylko przedmiot sie usuwa z planu i godziny są rozdawane pomiedzy przedmioty niestety musi byc okresloan liczba godzin dzniwo)
 7.Zrobić żeby wyniki egzaminów były w % i nie mogły być wieksze niz 100 i mniejsze niz 0 (done)
 8.w Visualizerze wysokosc panelu z planem zmienic, zeby nie zostawalo tyle wolnego miejsca na dole
-
+9. Crashuje sie jak studiedTime na poczatku sie poda wiekszy niz requiredTime

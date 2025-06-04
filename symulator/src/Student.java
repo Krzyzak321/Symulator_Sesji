@@ -12,6 +12,20 @@ public class Student {
     public Visualizer visualizer;
 
     Student(String name, List<Subject> subjects, int mode, int days) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Imię studenta nie może być puste.");
+        }
+        if (subjects == null || subjects.isEmpty()) {
+            throw new IllegalArgumentException("Lista przedmiotów nie może być pusta.");
+        }
+        if (subjects.stream().anyMatch(s -> s == null)) {
+            throw new IllegalArgumentException("Lista przedmiotów nie może zawierać nulli.");
+        }
+        if (mode < 0) {
+            throw new IllegalArgumentException("Tryb musi być nieujemny.");
+        }
+        if (days <= 0) {
+            throw new IllegalArgumentException("Liczba dni musi być dodatnia.");
         this.name = name;
         this.subjects = subjects;
         this.history = new ArrayList<>();
