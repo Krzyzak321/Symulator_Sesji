@@ -81,9 +81,28 @@ public class Reader {
         JButton add = new JButton("Dodaj Przedmiot");
         add.addActionListener(e -> {
             String name=subName.getText();
+            int ects = (int) ectsA.getValue();
+            int predis = (int) predisA.getValue();
+            int studied = (int) studiedA.getValue();
             if(name.isEmpty()){
                 //Jesli nazwa przedmiotu nie zostala wpisana, nie rob nic, i wyswietl blad
                 error.setText("Wprowadź Nazwę Przedmiotu");
+            }
+            if (subjectList.stream().anyMatch(s -> s.getName().equalsIgnoreCase(name))) {
+                error.setText("Przedmiot o tej nazwie już istnieje.");
+                return;
+            }
+            if (ects <= 0) {
+                error.setText("ECTS musi być większe od 0.");
+                return;
+            }
+            if (predis < 0 || predis > 100) {
+                error.setText("Predyspozycje muszą być w zakresie 0-100.");
+                return;
+            }
+            if (studied < 0) {
+                error.setText("Czas nauki nie może być ujemny.");
+                return;
             }
             else {
                 //Pobierz dane z pól

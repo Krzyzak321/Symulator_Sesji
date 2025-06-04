@@ -7,6 +7,18 @@ public class ExamSimulator {
     public static int days;
 
     public ExamSimulator(Student student, List<Motivator> motivators, int days) {
+        if (student == null) {
+            throw new IllegalArgumentException("Student nie może być nullem.");
+        }
+        if (motivators == null || motivators.isEmpty()) {
+            throw new IllegalArgumentException("Lista motywatorów nie może być pusta.");
+        }
+        if (motivators.stream().anyMatch(m -> m == null)) {
+            throw new IllegalArgumentException("Lista motywatorów nie może zawierać nulli.");
+        }
+        if (days <= 0) {
+            throw new IllegalArgumentException("Liczba dni musi być większa od 0.");
+        }
         this.student = student;
         this.motivators = motivators;
         this.days = days;
