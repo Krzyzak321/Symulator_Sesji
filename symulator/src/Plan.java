@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Plan {
     private int days;
+    private int mode;
     private Map<Integer, Map<Subject, Integer>> schedule ;
     Plan(int days) {
         if (days <= 0) {
@@ -22,6 +23,7 @@ public class Plan {
 
         this.days = days;
         this.schedule = new HashMap<>();
+        this.mode = mode;
         subjects = SubjectSorter.sortSubjects(subjects);
         generate(subjects,days,mode);
     }
@@ -147,4 +149,7 @@ private void generateAllEveryDay(List<Subject> subjects, int days) {
 //        return totalRequired;
 //    }
     public Map<Integer, Map<Subject, Integer>> getSchedule() {return schedule;}
+    public int getMode(){
+        return this.mode;
+    }
 }

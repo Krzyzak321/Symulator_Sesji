@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.lang.reflect.Array;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -198,9 +199,13 @@ public class Visualizer{
 
     // Tworzy panel z podanym planem nauki
     public void insertPlan(Plan plan) {
-        panelPlan.setPreferredSize(new Dimension(300, ExamSimulator.days*105));
+        int height=105;
+        if (plan.getMode()==1){
+            height=50;
+        }
+        panelPlan.setPreferredSize(new Dimension(300, Collections.max(plan.getSchedule().keySet())*height));
 
-        for (int day = 1; day <= ExamSimulator.days; day++) {
+        for (int day = 1; day <= Collections.max(plan.getSchedule().keySet()); day++) {
             String dayName="Dzień " + day + ":";
 
             JLabel label = new JLabel(dayName);
