@@ -217,5 +217,4 @@ public class Reader {
     public int getMode() {
         return mode;
     }
-
 }
