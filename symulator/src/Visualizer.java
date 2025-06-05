@@ -19,6 +19,7 @@ public class Visualizer{
     JPanel resultsPanel;
     JProgressBar motivationBar;
     JLabel dayLabel;
+    JLabel motivationUpdate;
     int numberOfCharts;
     public List<Subject> listOfSubjects;
     int currentDay;
@@ -36,6 +37,7 @@ public class Visualizer{
         this.currentDay=1;
         this.currentTime=10;
         this.plan=student.getPlan();
+        this.motivationUpdate = new JLabel("Ostatni Motywor: Siema Eniu");
         student.setVisualizer(this);
 
         for ( Subject subject : listOfSubjects ) addChart(subject);
@@ -132,6 +134,8 @@ public class Visualizer{
         motivationPanel.add(motivationLabel);
         motivationPanel.add(motivationBar);
 
+        motivationUpdate.setFont(new Font("Arial", Font.BOLD, 12));
+        motivationPanel.add(motivationUpdate, BorderLayout.SOUTH);
 
         JPanel outerPanel4 = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         outerPanel4.add(motivationPanel);
@@ -271,7 +275,6 @@ public class Visualizer{
             }
         });
 
-
         resultsFrame.add(info, BorderLayout.SOUTH);
         resultsPanel.add(download);
         resultsFrame.add(resultsPanel);
@@ -308,6 +311,10 @@ public class Visualizer{
     private static int calculateWindowWidth(int numberOfCharts){
         if(numberOfCharts<3) return (numberOfCharts*260);
         return 780;
+    }
+
+    public void updateMotivator(String motivator){
+        motivationUpdate.setText("Ostatni Motywator: " + motivator);
     }
 
 }
