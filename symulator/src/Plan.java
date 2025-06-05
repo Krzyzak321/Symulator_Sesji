@@ -164,12 +164,13 @@ private void generateAllEveryDay(List<Subject> subjects, int days) {
                     writer.println();
                     continue;
                 }
+                writer.printf("Dzień %d: ", day);
                 boolean pierwszy = true;
                 for (Map.Entry<Subject, Integer> entry : dayMap.entrySet()) {
                     Subject subj = entry.getKey();
                     int hours = entry.getValue();
                     if (!pierwszy) writer.print(";");
-                    writer.printf("Dzień %d: %s-%dh",day, subj.getName(), hours);
+                    writer.printf("%s-%dh", subj.getName(), hours);
                     pierwszy = false;
                 }
                 writer.println();
