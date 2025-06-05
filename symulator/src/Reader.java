@@ -86,7 +86,7 @@ public class Reader {
             int studied = (int) studiedA.getValue();
             int required = (18*ects-(int)(9*ects*(predis/100.0)));
             if(studied>required){
-                studied=required;
+                studied=required-1;
             }
             if (subjectList.stream().anyMatch(s -> s.getName().equalsIgnoreCase(name))) {
                 error.setText("Przedmiot o tej nazwie już istnieje.");
@@ -109,11 +109,6 @@ public class Reader {
                 error.setText("Wprowadź Nazwę Przedmiotu");
             }
             else {
-                //Pobierz dane z pól
-//                int ects = (int) ectsA.getValue();
-//                int predis = (int) predisA.getValue();
-//                int studied = (int) studiedA.getValue();
-
                 //Tworzy przedmiot i dodaje go do listy przedmiotow
                 this.subjectList.add(new Subject(name, ects, predis, studied));
                 model.addRow(new Object[]{name, ects, predis, studied});
