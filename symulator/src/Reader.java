@@ -49,7 +49,7 @@ public class Reader {
         outerPanel.add(subName);
 
         //Pola do wpisania liczb
-        JSpinner ectsA = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
+        JSpinner ectsA = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1));
         JSpinner predisA = new JSpinner(new SpinnerNumberModel(50, 0, 100, 1));
         JSpinner studiedA = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
 
@@ -84,9 +84,9 @@ public class Reader {
             int ects = (int) ectsA.getValue();
             int predis = (int) predisA.getValue();
             int studied = (int) studiedA.getValue();
-            if(name.isEmpty()){
-                //Jesli nazwa przedmiotu nie zostala wpisana, nie rob nic, i wyswietl blad
-                error.setText("Wprowadź Nazwę Przedmiotu");
+            int required = (18*ects-(int)(9*ects*(predis/100.0)));
+            if(studied>required){
+                studied=required;
             }
             if (subjectList.stream().anyMatch(s -> s.getName().equalsIgnoreCase(name))) {
                 error.setText("Przedmiot o tej nazwie już istnieje.");
@@ -104,6 +104,10 @@ public class Reader {
                 error.setText("Czas nauki nie może być ujemny.");
                 return;
             }
+            if(name.isEmpty()){
+                //Jesli nazwa przedmiotu nie zostala wpisana, nie rob nic, i wyswietl blad
+                error.setText("Wprowadź Nazwę Przedmiotu");
+            }
             else {
                 //Pobierz dane z pól
 //                int ects = (int) ectsA.getValue();
@@ -116,7 +120,7 @@ public class Reader {
 
                 //Ustawia pola danych na puste
                 subName.setText("");
-                ectsA.setValue(0);
+                ectsA.setValue(1);
                 predisA.setValue(50);
                 studiedA.setValue(0);
 
