@@ -20,11 +20,11 @@
 
 Projekt umożliwia:
 - Tworzenie planu nauki dla studentów,
-- Symulowanie motywatorów i czynników wpływających na naukę (np. przerwa na kawę, prokrastynacja),
+- Symulowanie motywatorów i czynników wpływających na naukę (np. Szansa na dobrą pracę, prokrastynacja),
 - Przechowywanie historii nauki,
 - Przeprowadzanie symulacji egzaminów,
-- Wizualizację postępów i wyników (wykresy, statystyki),
-- Wczytywanie oraz zapisywanie danych z plików.
+- Wizualizację postępów i wyników (wykresy),
+- Zapisywanie danych z plików.
 
 ## Struktura katalogów
 
