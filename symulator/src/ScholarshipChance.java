@@ -5,6 +5,6 @@ public class ScholarshipChance implements Motivator {
         student.setMotivation(motivation);
     }
     public String getName(){
-        return "Zły chumor";
+        return "Szansa na stypendium";
     }
 }

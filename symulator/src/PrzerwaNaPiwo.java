@@ -5,6 +5,6 @@ public class PrzerwaNaPiwo implements Motivator {
         student.setMotivation(motivation);
     }
     public String getName(){
-        return "Przerwa na piwo :)";
+        return "Przerwa na piwo";
     }
 }

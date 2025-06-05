@@ -5,6 +5,6 @@ public class Disease implements Motivator{
             student.setMotivation(motivation);
         }
         public String getName(){
-            return "Choroba";
+            return "Złe samopoczucie";
         }
 }

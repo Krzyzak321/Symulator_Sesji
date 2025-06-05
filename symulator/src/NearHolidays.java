@@ -5,6 +5,6 @@ public class NearHolidays implements Motivator {
         student.setMotivation(motivation);
     }
     public String getName(){
-        return "Niedługo wakacje";
+        return "Niedługo przerwa od nauki";
     }
 }
