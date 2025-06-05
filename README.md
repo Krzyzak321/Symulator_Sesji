@@ -13,7 +13,6 @@
 - [Konfiguracja IDE (np. IntelliJ, Eclipse)](#konfiguracja-ide-np-intellij-eclipse)
 - [Kompilacja i uruchamianie](#kompilacja-i-uruchamianie)
 - [Plik symulator_fat.jar](#plik-symulator_fatjar)
-- [Autorzy](#autorzy)
 
 ---
 
