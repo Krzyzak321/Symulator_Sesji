@@ -39,7 +39,7 @@ public class Main {
         int failedEcts = ExamResult.sumFailedEcts(results);
         System.out.println("Suma ECTS za niezdane przedmioty: " + failedEcts);
         student.visualizer.updateResults("Suma ECTS za niezdane przedmioty: " + failedEcts);
-
+        if(failedEcts==0)student.visualizer.updateResults("Sesja zaliczona!!");
         //  historia nauki
 //        System.out.println("\nHISTORIA NAUKI:");
 //        for (StudyEvent event : student.getHistory()) {

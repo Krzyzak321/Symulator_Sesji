@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Visualizer{
     public List<Subject> listOfSubjects;
     int currentDay;
     int currentTime;
+    Plan plan;
 
     public Visualizer(Student student){
         this.frame = new JFrame();
@@ -33,6 +35,7 @@ public class Visualizer{
         this.numberOfCharts = listOfSubjects.size();
         this.currentDay=1;
         this.currentTime=10;
+        this.plan=student.getPlan();
         student.setVisualizer(this);
 
         for ( Subject subject : listOfSubjects ) addChart(subject);
@@ -87,6 +90,7 @@ public class Visualizer{
         dayPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
         dayPanel.setPreferredSize(new Dimension(width, 50));
         dayLabel.setFont(new Font("Arial", Font.BOLD, 28));
+        if(listOfSubjects.size()==1) dayLabel.setFont(new Font("Arial", Font.BOLD, 20));
         dayPanel.add(dayLabel);
         //-----------------------------------//
 
@@ -247,8 +251,32 @@ public class Visualizer{
         resultsFrame.setSize(450, 300);
         resultsFrame.setLocationRelativeTo(null);
         resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
+
+        JLabel info = new JLabel("");
+        info.setFont(new Font("Arial", Font.PLAIN, 18));
+
+
+
+        JButton download = new JButton("Pobierz Plan");
+        download.setFont(new Font("Arial", Font.PLAIN, 18));
+        download.addActionListener(e->{
+            try {
+                plan.exportTxt("plan.txt");
+                info.setText("Wyeksportowanu do pliku \"plan.txt\"");
+                info.setForeground(new Color(32, 147, 19));
+            } catch (IOException ex) {
+                info.setText("Wystapil blad podczas eksportowania");
+                info.setForeground(new Color(166, 18, 18));
+                throw new RuntimeException(ex);
+            }
+        });
+
+
+        resultsFrame.add(info, BorderLayout.SOUTH);
+        resultsPanel.add(download);
         resultsFrame.add(resultsPanel);
         resultsFrame.setVisible(true);
+
     }
 
     //Liczy kolor paska motywacji na podstawie zapelnienia

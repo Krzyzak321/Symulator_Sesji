@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class Plan {
@@ -151,5 +154,26 @@ private void generateAllEveryDay(List<Subject> subjects, int days) {
     public Map<Integer, Map<Subject, Integer>> getSchedule() {return schedule;}
     public int getMode(){
         return this.mode;
+    }
+
+    public void exportTxt(String filename) throws IOException {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+            for (int day = 1; day <= days; day++) {
+                Map<Subject, Integer> dayMap = schedule.get(day);
+                if (dayMap == null || dayMap.isEmpty()) {
+                    writer.println();
+                    continue;
+                }
+                boolean pierwszy = true;
+                for (Map.Entry<Subject, Integer> entry : dayMap.entrySet()) {
+                    Subject subj = entry.getKey();
+                    int hours = entry.getValue();
+                    if (!pierwszy) writer.print(";");
+                    writer.printf("Dzień %d: %s-%dh",day, subj.getName(), hours);
+                    pierwszy = false;
+                }
+                writer.println();
+            }
+        }
     }
 }
