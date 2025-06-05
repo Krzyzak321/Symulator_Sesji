@@ -17,9 +17,6 @@ public class Subject {
         if (ects <= 0) {
             throw new IllegalArgumentException("Liczba ECTS musi być dodatnia.");
         }
-        if (predispositions < 0 || predispositions > 100) {
-            throw new IllegalArgumentException("Predyspozycje muszą być w zakresie 0-100.");
-        }
         if (studiedTime < 0) {
             throw new IllegalArgumentException("Czas nauki nie może być ujemny.");
         }
@@ -42,9 +39,6 @@ public class Subject {
         }
         if (ects <= 0) {
             throw new IllegalArgumentException("Liczba ECTS musi być dodatnia.");
-        }
-        if (predispositions < 0 || predispositions > 100) {
-            throw new IllegalArgumentException("Predyspozycje muszą być w zakresie 0-100.");
         }
         this.name = name;
         this.ects = ects;
