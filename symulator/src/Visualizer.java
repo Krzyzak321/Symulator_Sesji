@@ -37,7 +37,7 @@ public class Visualizer{
         this.currentDay=1;
         this.currentTime=10;
         this.plan=student.getPlan();
-        this.motivationUpdate = new JLabel("Ostatni Motywor: Siema Eniu");
+        this.motivationUpdate = new JLabel("");
         student.setVisualizer(this);
 
         for ( Subject subject : listOfSubjects ) addChart(subject);
