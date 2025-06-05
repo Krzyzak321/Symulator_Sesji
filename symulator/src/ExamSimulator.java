@@ -3,24 +3,25 @@ import java.util.concurrent.TimeUnit;
 
 public class ExamSimulator {
     private Student student;
-    private List<Motivator> motivators;
+    private List<Motivator> motivators = new ArrayList<>();
     public static int days;
 
-    public ExamSimulator(Student student, List<Motivator> motivators, int days) {
-        if (student == null) {
-            throw new IllegalArgumentException("Student nie może być nullem.");
-        }
-        if (motivators == null || motivators.isEmpty()) {
-            throw new IllegalArgumentException("Lista motywatorów nie może być pusta.");
-        }
-        if (motivators.stream().anyMatch(m -> m == null)) {
-            throw new IllegalArgumentException("Lista motywatorów nie może zawierać nulli.");
-        }
-        if (days <= 0) {
-            throw new IllegalArgumentException("Liczba dni musi być większa od 0.");
-        }
+    public ExamSimulator(Student student, int days) {
+//        if (student == null) {
+//            throw new IllegalArgumentException("Student nie może być nullem.");
+//        }
+//        if (motivators == null || motivators.isEmpty()) {
+//            throw new IllegalArgumentException("Lista motywatorów nie może być pusta.");
+//        }
+//        if (motivators.stream().anyMatch(m -> m == null)) {
+//            throw new IllegalArgumentException("Lista motywatorów nie może zawierać nulli.");
+//        }
+//        if (days <= 0) {
+//            throw new IllegalArgumentException("Liczba dni musi być większa od 0.");
+//        }
+        Collections.addAll(motivators, new BadMood(), new CoffeeBreak(), new Disease(), new Employment(), new Lazyness(), new NearHolidays(), new Procrastination(), new PrzerwaNaPiwo(), new ScholarshipChance());
         this.student = student;
-        this.motivators = motivators;
+
         this.days = days;
     }
 
@@ -45,8 +46,12 @@ public class ExamSimulator {
                 int hours = dailyPlan.get(subject);
                 for (int h = 1; h <= hours; h++) {
                     // Losowanie motivatora co godzinę i motywacja wpływa an naukę jak ma większą od neutralnej uczy się szybciej a jak mniejszą to wolniej lecz godziny i tak lecą tylko mniej lub bardziej sie nauczy na przedmiot
-                    Motivator motivator = motivators.get(random.nextInt(motivators.size()));
-                    student.applyMotivator(motivator);
+                    Random szansaNaEventMotywacji = new Random();
+                    if (szansaNaEventMotywacji.nextInt(3)==2) {
+                        Motivator motivator = motivators.get(random.nextInt(motivators.size()));
+                        student.applyMotivator(motivator);
+                        System.out.println(motivator.getName());
+                    }
                     if(student.getMotivation()<=0){
                         break;
                     }

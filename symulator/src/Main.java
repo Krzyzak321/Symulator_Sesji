@@ -19,12 +19,12 @@ public class Main {
 //        Student student = new Student("Janek", subjects, 0, days); // tryb 0 = wszystkie codziennie
 
         // Tworzymy motywatory
-        List<Motivator> motivators = new ArrayList<>();
-        motivators.add(new PrzerwaNaPiwo());
-        motivators.add(new Procrastination());
+//        List<Motivator> motivators = new ArrayList<>();
+//        motivators.add(new PrzerwaNaPiwo());
+//        motivators.add(new Procrastination());
 
         // Uruchamiamy symulator
-        ExamSimulator simulator = new ExamSimulator(student, motivators, data.getDays());
+        ExamSimulator simulator = new ExamSimulator(student, data.getDays());
         simulator.run();
         student.getPlan().printPlan();
         // Wyświetlamy wyniki egzaminów

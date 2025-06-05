@@ -1,10 +1,10 @@
-public class PrzerwaNaPiwo implements Motivator {
+public class ScholarshipChance implements Motivator {
     public void apply(Student student){
         int motivation = student.getMotivation();
-        motivation += 10;
+        motivation += 20;
         student.setMotivation(motivation);
     }
     public String getName(){
-        return "Przerwa na piwo :)";
+        return "Zły chumor";
     }
 }
