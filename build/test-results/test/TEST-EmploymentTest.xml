@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="EmploymentTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-06-06T19:55:18" hostname="SIGMAPUTER" time="0.014">
+  <properties/>
+  <testcase name="testApplyIncreasesMotivation" classname="EmploymentTest" time="0.012"/>
+  <testcase name="testGetName" classname="EmploymentTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-group = 'pl.pawelltama'
+group = 'pl.studentprojekt'
 version = '1.0'
 
 sourceCompatibility = 17
