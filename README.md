@@ -12,7 +12,6 @@
 - [Budowanie i uruchamianie](#budowanie-i-uruchamianie)
 - [Testy jednostkowe](#testy-jednostkowe)
 - [Plik fat-jar](#plik-fat-jar)
-- [Autorzy](#autorzy)
 
 ---
 
