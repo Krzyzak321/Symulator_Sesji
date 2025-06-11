@@ -1,96 +1,123 @@
-
 # Symulator Sesji
 
-**Symulator Sesji** to projekt w języku Java służący do modelowania i symulacji przygotowań studenta do egzaminów. Pozwala planować naukę, śledzić postępy, symulować egzaminy oraz generować wizualizacje postępów. Projekt wykorzystuje zewnętrzne biblioteki z katalogu `libs/`.
+**Symulator Sesji** to projekt w języku Java służący do symulacji przygotowań studenta do egzaminów. Pozwala na planowanie nauki, symulowanie postępów, analizę czynników wpływających na motywację oraz generowanie wizualizacji. Projekt korzysta z systemu budowania **Gradle**.
 
 ---
 
 ## Spis treści
-
-- [Opis projektu](#opis-projektu)
-- [Struktura katalogów](#struktura-katalogów)
+- [Opis](#opis)
 - [Wymagania](#wymagania)
-- [Konfiguracja IDE (np. IntelliJ, Eclipse)](#konfiguracja-ide-np-intellij-eclipse)
-- [Kompilacja i uruchamianie](#kompilacja-i-uruchamianie)
-- [Plik symulator_fat.jar](#plik-symulator_fatjar)
+- [Struktura projektu](#struktura-projektu)
+- [Konfiguracja środowiska (IntelliJ/VSCode)](#konfiguracja-środowiska-intellijvscode)
+- [Budowanie i uruchamianie](#budowanie-i-uruchamianie)
+- [Testy jednostkowe](#testy-jednostkowe)
+- [Plik fat-jar](#plik-fat-jar)
 
 ---
 
-## Opis projektu
+## Opis
 
-Projekt umożliwia:
-- Tworzenie planu nauki dla studentów,
-- Symulowanie motywatorów i czynników wpływających na naukę (np. Szansa na dobrą pracę, prokrastynacja),
-- Przechowywanie historii nauki,
-- Przeprowadzanie symulacji egzaminów,
-- Wizualizację postępów i wyników (wykresy),
-- Zapisywanie danych z plików.
+Aplikacja umożliwia:
+- Tworzenie i zarządzanie planem nauki studenta
+- Symulowanie wpływu różnych motywatorów i przeszkód (zły chumor,szansa na stypendium, choroba, prokrastynacja itd.)
+- Przechowywanie historii nauki i wyników egzaminów
+- Wizualizację postępów w nauce
+- Zapisywanie planu nauki do pliku
 
-## Struktura katalogów
-
-```
-libs/             # biblioteki zewnętrzne (.jar)
-symulator/
-  └── src/        # kod źródłowy (pliki .java)
-      └── images/ # obrazy do okienek (opcjonalne)
-uml/              # diagramy UML
-README.md
-symulator_fat.jar # zbudowany plik JAR z wszystkimi bibliotekami
-```
+---
 
 ## Wymagania
 
-- **Java 17 lub wyższa** (zalecane Java 21 LTS)
-- IDE obsługujące projekty Java (np. IntelliJ IDEA, Eclipse, NetBeans)
-
-## Konfiguracja IDE (np. IntelliJ, Eclipse)
-
-Projekt nie korzysta z systemu budowania (Maven/Gradle), dlatego **biblioteki musisz dodać ręcznie**:
-
-### IntelliJ IDEA
-
-1. **Utwórz nowy projekt Java** lub otwórz katalog `symulator` jako projekt.
-2. Dodaj do projektu cały katalog `symulator/src` jako źródłowy (`Mark Directory as -> Sources Root`).
-3. Wejdź w `File -> Project Structure -> Modules -> Dependencies`.
-4. Kliknij `+` i wybierz `JARs or directories`, wskaż cały katalog `libs/`.
-5. Zatwierdź zmiany.
-6. Upewnij się, że JDK ustawione dla projektu to Java 17 lub wyższa.
-
-### Eclipse
-
-1. Utwórz nowy projekt Java.
-2. Skopiuj pliki z `symulator/src` do katalogu `src` w projekcie.
-3. Kliknij projekt PPM → Properties → Java Build Path → zakładka Libraries → Add External JARs.
-4. Dodaj wszystkie pliki `.jar` z katalogu `libs/`.
-5. Zatwierdź zmiany i zbuduj projekt.
-
-## Kompilacja i uruchamianie
-
-Zakładając, że jesteś w katalogu głównym projektu i masz Javę 17+:
-
-### Kompilacja (ręczna, z poziomu terminala)
-
-```bash
-javac -cp "libs/*" -d out symulator/src/*.java
-```
-
-### Uruchamianie
-
-```bash
-java -cp "libs/*:out" Main
-```
-*(na Windows separator to średnik: `libs/*;out`)*
-
-## Plik symulator_fat.jar
-
-W repozytorium znajduje się plik **symulator_fat.jar** – to tzw. "fat-jar", czyli już zbudowany plik JAR zawierający wszystkie klasy oraz biblioteki.  
-Możesz go uruchomić na dowolnym komputerze z zainstalowaną Javą (17 lub wyższą):
-
-```bash
-java -jar symulator_fat.jar
-```
-
-Nie wymaga żadnej dodatkowej konfiguracji ani instalowania bibliotek.
+- **Java 17 lub nowsza** (zalecane Java 21)
+- **Gradle 8+** (jeśli nie masz, projekt zawiera wrappera)
+- (Opcjonalnie) środowisko IDE: IntelliJ IDEA, Eclipse, VSCode
 
 ---
 
+## Struktura projektu
+
+```
+Symulator_Sesji/
+├── build.gradle
+├── settings.gradle
+├── gradlew / gradlew.bat
+├── libs/                  # zewnętrzne biblioteki .jar (jeśli używasz)
+├── src/
+│   ├── main/
+│   │   └── java/
+│   │       ├── Main.java
+│   │       ├── Student.java
+│   │       └── ... (inne klasy)
+│   └── test/
+│       └── java/
+│           ├── MainTest.java
+│           └── ... (testy jednostkowe)
+```
+
+---
+
+## Konfiguracja środowiska (IntelliJ/VSCode)
+
+1. **Otwórz projekt przez `build.gradle` lub `settings.gradle`**  
+   Wybierz "Open Project" w IDE i wskaż katalog główny projektu.
+
+2. **Załaduj zależności Gradle**  
+   IDE automatycznie wykryje plik `build.gradle` i dociągnie zależności.  
+   Jeśli masz katalog `libs/` z własnymi `.jar`, są one automatycznie dołączone do projektu.
+
+3. **Uruchamianie**  
+   - W IntelliJ: Otwórz plik `Main.java` i kliknij zieloną strzałkę (lub z menu: Gradle → Tasks → application → run).
+   - W VSCode: Zainstaluj rozszerzenie Java i uruchom aplikację przez "Run".
+
+---
+
+## Budowanie i uruchamianie
+
+### Z linii komend
+
+1. **Budowanie projektu:**
+    ```sh
+    ./gradlew build
+    ```
+
+2. **Uruchamianie:**
+    ```sh
+    ./gradlew run
+    ```
+    lub uruchom bezpośrednio zbudowany fat-jar:
+    ```sh
+    java -jar build/libs/Symulator_Sesji.jar
+    ```
+
+### Parametr klasy głównej
+
+Jeśli Twoja klasa main nazywa się inaczej niż `Main`, sprawdź lub zmień w `build.gradle`:
+```groovy
+application {
+    mainClass = 'Main'
+}
+```
+Dla klasy w pakiecie, np. `symulator.Main`, wpisz pełną ścieżkę pakietu.
+
+---
+
+## Testy jednostkowe
+
+Testy są w katalogu `src/test/java/`.  
+Uruchom je poleceniem:
+```sh
+./gradlew test
+```
+Raporty znajdziesz w `build/reports/tests/test/index.html`.
+
+---
+
+## Plik fat-jar
+
+Po kompilacji (`./gradlew build`) gotowy plik JAR znajdziesz w `build/libs/Symulator_Sesji.jar`.  
+Możesz go uruchomić na dowolnym komputerze z Javą:
+```sh
+java -jar build/libs/Symulator_Sesji.jar
+```
+
+---

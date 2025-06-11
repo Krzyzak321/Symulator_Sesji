@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Sesja_Symulator.iml" filepath="$PROJECT_DIR$/Sesja_Symulator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Symulator_Sesji.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Symulator_Sesji.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Symulator_Sesji.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Symulator_Sesji.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/symulator/images/images.iml" filepath="$PROJECT_DIR$/symulator/images/images.iml" />
       <module fileurl="file://$PROJECT_DIR$/symulator/symulator.iml" filepath="$PROJECT_DIR$/symulator/symulator.iml" />
       <module fileurl="file://$PROJECT_DIR$/uml/uml.iml" filepath="$PROJECT_DIR$/uml/uml.iml" />
