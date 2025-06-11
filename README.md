@@ -41,7 +41,7 @@ Symulator_Sesji/
 ├── build.gradle
 ├── settings.gradle
 ├── gradlew / gradlew.bat
-├── libs/                  # zewnętrzne biblioteki .jar (jeśli używasz)
+├── libs/                  # zewnętrzne biblioteki .jar 
 ├── src/
 │   ├── main/
 │   │   └── java/
@@ -89,17 +89,6 @@ Symulator_Sesji/
     java -jar build/libs/Symulator_Sesji.jar
     ```
 
-### Parametr klasy głównej
-
-Jeśli Twoja klasa main nazywa się inaczej niż `Main`, sprawdź lub zmień w `build.gradle`:
-```groovy
-application {
-    mainClass = 'Main'
-}
-```
-Dla klasy w pakiecie, np. `symulator.Main`, wpisz pełną ścieżkę pakietu.
-
----
 
 ## Testy jednostkowe
 
