@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-group = 'pl.studentprojekt'
+group = 'pl.sesja'
 version = '1.0'
 
 sourceCompatibility = 17
@@ -20,7 +20,6 @@ repositories {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    // Jeśli korzystasz z JUnit do testów:
     testImplementation 'junit:junit:4.13.2'
 }
 
