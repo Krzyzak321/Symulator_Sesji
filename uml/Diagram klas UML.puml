@@ -1,5 +1,4 @@
 @startuml
-' Diagram klas - pełna wersja dla Symulator_Sesji
 
 class Main
 class ExamSimulator
@@ -63,14 +62,13 @@ Motivator <|.. PrzerwaNaPiwo
 Motivator <|.. BadMood
 Motivator <|.. NearHolidays
 
-' Przykładowe relacje asocjacji/kompozycji
 Student "1" o-- "*" Subject
 Plan "1" o-- "*" Subject
 Student "1" o-- "1" Plan
 Visualizer "1" o-- "1" Student
 ExamResult "*" o-- "1" Subject
 
-' Pozostałe klasy narzędziowe
+
 Main ..> ExamSimulator
 ExamSimulator ..> Student
 ExamSimulator ..> Plan

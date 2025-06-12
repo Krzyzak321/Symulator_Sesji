@@ -1,6 +1,6 @@
 @startuml
 
-' Student z rzeczywistymi polami
+
 object student1 {
   name = "Jan Kowalski"
   motivation = 100
@@ -52,7 +52,7 @@ object visualizer1 {
   currentTime = 10
 }
 
-' Reader dopełniający - np. jako referencja
+
 object reader1
 
 ' Relacje
