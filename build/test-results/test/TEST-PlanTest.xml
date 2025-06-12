@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PlanTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-06-12T17:29:43" hostname="DESKTOP-C1UQBSS" time="0.001">
+<testsuite name="PlanTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-06-12T17:39:20" hostname="DESKTOP-C1UQBSS" time="0.001">
   <properties/>
   <testcase name="testCreatePlan()" classname="PlanTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
