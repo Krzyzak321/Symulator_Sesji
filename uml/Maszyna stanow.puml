@@ -1,16 +1,23 @@
 @startuml
+[*] --> WprowadzanieDanych
 
-[*] --> Przygotowanie
+WprowadzanieDanych --> GotowyDoNauki : dane poprawne
+WprowadzanieDanych --> [*] : anuluj
 
-Przygotowanie --> Sortowanie : jeśli subjects != null
-Sortowanie --> Planowanie : jeśli plan == null
-Planowanie --> Nauka : dzień = 1
+GotowyDoNauki --> Nauka : rozpocznij naukę
 
-Nauka --> MotywacjaSpada : motivation < próg
-MotywacjaSpada --> Nauka : motywacja > próg
+state Nauka {
+    [*] --> NaukaGodzina
+    NaukaGodzina --> LosowanieMotywatora : zakończono godzinę nauki
+    LosowanieMotywatora --> ZmieńMotywacje : [25% szans] trafia motywator
+    LosowanieMotywatora --> NaukaGodzina : [75% szans] brak motywatora
+    ZmieńMotywacje --> NaukaGodzina : zwiększono motywację
+    NaukaGodzina --> KoniecNauki : koniec planu nauki
+}
 
-Nauka --> Egzamin : dzień > max
-Egzamin --> Wyniki : exams taken
-Wyniki --> [*]
+Nauka --> Sesja : koniec planu nauki
+Sesja --> Egzamin : podejdź do egzaminu
+Egzamin --> Wyniki : sprawdź wynik
+Wyniki --> [*] : zakończ symulację
 
 @enduml

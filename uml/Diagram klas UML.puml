@@ -1,118 +1,84 @@
 @startuml
 
-' ===== INTERFEJSY I MOTYWATORY =====
-interface Motivator {
-    +apply(student: Student): void
-    +getName(): String
-}
+class Main
+class ExamSimulator
 
-class CoffeeBreak implements Motivator {
-    +apply(student: Student): void
-    +getName(): String
-}
 
-class Procrastination implements Motivator {
-    +apply(student: Student): void
-    +getName(): String
-}
-
-Motivator <|-- CoffeeBreak
-Motivator <|-- Procrastination
-
-' ===== PRZEDMIOT =====
-class Subject {
-    -name: String
-    -predispositions: int
-    -requiredTime: int
-    -studiedTime: double
-    -ects: int
-    +study(hours: double): void
-    +isReady(): boolean
-    +getProgress(): double
-    +getName(): String
-    +getRequiredTime(): int
-    +getStudiedTime(): double
-    +getEcts(): int
-    +getPredispositions(): int
-}
-
-' ===== SORTOWANIE PRZEDMIOTÓW =====
-class SubjectSorter {
-    +sortSubjects(subjects: List<Subject>): List<Subject>
-}
-
-' ===== ZDARZENIE NAUKI =====
-class StudyEvent {
-    -subject: Subject
-    -hours: int
-    -day: int
-    -motivation: int
-    +getDescription(): String
-}
-
-' ===== PLAN =====
-class Plan {
-    -days: int
-    -schedule: Map<Integer, Map<Subject, Integer>>
-    +generate(subjects: List<Subject>, totalDays: int, mode: int): void
-    +getDailyPlan(day: int): Map<Subject, Integer>
-    +printPlan(): void
-    +getSchedule(): Map<Integer, Map<Subject, Integer>>
-}
-
-' ===== WYNIK EGZAMINU =====
-class ExamResult {
-    -subject: Subject
-    -score: double
-    -passed: boolean
-    +isPassed(): boolean
-    +getGrade(): String
-    +getSubjectName(): String
-    +getScore(): double
-    +toString(): String
-}
-
-' ===== STUDENT =====
 class Student {
-    -name: String
-    -motivation: int
-    -plan: Plan
-    -subjects: List<Subject>
-    -history: List<StudyEvent>
-    -wyniki: List<ExamResult>
-    -visualizer: Visualizer
-    +study(subject: Subject, hours: int, day: int): void
-    +takeExams(subjects: List<Subject>): List<ExamResult>
-    +applyMotivator(m: Motivator): void
-    +getMotivation(): int
-    +setMotivation(motivation: int): void
-    +getPlan(): Plan
-    +getSubjects(): List<Subject>
-    +getHistory(): List<StudyEvent>
-    +setVisualizer(Visualizer): void
-    +getVisualizer(): Visualizer
-    +getExamResults(): List<ExamResult>
+    -name : String
+    -motivation : int
+    -intelligence : int
+    -subjects : List<Subject>
 }
 
-' ===== WIZUALIZATOR =====
+class Plan {
+    -subjects : List<Subject>
+}
+
+class Subject {
+    -name : String
+    -ects : int
+    -hours : int
+    -difficulty : int
+}
+class SubjectSorter
+
+class ExamResult {
+    -grade : double
+    -subject : Subject
+}
+
+class StudyEvent
+
 class Visualizer {
-    +Visualizer()
-    +visualizePlan(plan: Plan): void
-    +visualizeProgress(student: Student): void
-    +visualizeResults(student: Student): void
+    -student : Student
 }
 
-' ===== RELACJE =====
-Student --> Plan
-Student --> Subject
-Student --> StudyEvent
-Student --> ExamResult
-Student --> Visualizer
-Plan --> Subject
-Plan --> SubjectSorter
-StudyEvent --> Subject
-ExamResult --> Subject
-Visualizer ..> Plan
-Visualizer ..> Student
+class Reader
+
+interface Motivator {
+    +apply(Student)
+    +getName() : String
+}
+
+class Employment
+class ScholarshipChance
+class Procrastination
+class CoffeeBreak
+class Disease
+class Lazyness
+class PrzerwaNaPiwo
+class BadMood
+class NearHolidays
+
+' Klasy motywatorów dziedziczą po Motivator
+Motivator <|.. Employment
+Motivator <|.. ScholarshipChance
+Motivator <|.. Procrastination
+Motivator <|.. CoffeeBreak
+Motivator <|.. Disease
+Motivator <|.. Lazyness
+Motivator <|.. PrzerwaNaPiwo
+Motivator <|.. BadMood
+Motivator <|.. NearHolidays
+
+Student "1" o-- "*" Subject
+Plan "1" o-- "*" Subject
+Student "1" o-- "1" Plan
+Visualizer "1" o-- "1" Student
+ExamResult "*" o-- "1" Subject
+
+
+Main ..> ExamSimulator
+ExamSimulator ..> Student
+ExamSimulator ..> Plan
+ExamSimulator ..> Motivator
+ExamSimulator ..> Visualizer
+ExamSimulator ..> ExamResult
+ExamSimulator ..> StudyEvent
+
+SubjectSorter ..> Subject
+
+
 
 @enduml

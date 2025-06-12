@@ -50,7 +50,6 @@ Symulator_Sesji/
 │   │       └── ... (inne klasy)
 │   └── test/
 │       └── java/
-│           ├── MainTest.java
 │           └── ... (testy jednostkowe)
 ```
 
