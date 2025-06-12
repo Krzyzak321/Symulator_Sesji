@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="StudentTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-06-06T19:55:18" hostname="SIGMAPUTER" time="0.001">
+<testsuite name="StudentTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-06-11T10:40:11" hostname="DESKTOP-C1UQBSS" time="0.0">
   <properties/>
-  <testcase name="testMotivation" classname="StudentTest" time="0.001"/>
+  <testcase name="testMotivation" classname="StudentTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

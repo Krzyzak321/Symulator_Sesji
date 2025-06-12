@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PrzerwaNaPiwoTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-06-06T19:55:26" hostname="SIGMAPUTER" time="0.001">
+<testsuite name="PrzerwaNaPiwoTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-06-11T10:40:11" hostname="DESKTOP-C1UQBSS" time="0.001">
   <properties/>
   <testcase name="testGetName" classname="PrzerwaNaPiwoTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>

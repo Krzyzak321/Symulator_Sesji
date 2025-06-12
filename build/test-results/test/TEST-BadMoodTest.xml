@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="BadMoodTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-06-06T19:55:19" hostname="SIGMAPUTER" time="0.001">
+<testsuite name="BadMoodTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-06-11T10:40:11" hostname="DESKTOP-C1UQBSS" time="0.002">
   <properties/>
-  <testcase name="testGetName" classname="BadMoodTest" time="0.001"/>
+  <testcase name="testGetName" classname="BadMoodTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

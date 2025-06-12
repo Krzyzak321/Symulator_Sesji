@@ -70,7 +70,7 @@ goto fail
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\Symulator_Sesji-1.0.jar;%APP_HOME%\lib\orsonpdf-1.6-eval.jar;%APP_HOME%\lib\jcommon-1.0.23.jar;%APP_HOME%\lib\junit-4.11.jar;%APP_HOME%\lib\jfreesvg-2.0.jar;%APP_HOME%\lib\jfreechart-1.0.19-experimental.jar;%APP_HOME%\lib\hamcrest-core-1.3.jar;%APP_HOME%\lib\servlet.jar;%APP_HOME%\lib\orsoncharts-1.4-eval-nofx.jar;%APP_HOME%\lib\jfreechart-1.0.19.jar;%APP_HOME%\lib\swtgraphics2d.jar;%APP_HOME%\lib\jfreechart-1.0.19-swt.jar
+set CLASSPATH=%APP_HOME%\lib\Symulator_Sesji-1.0.jar;%APP_HOME%\lib\hamcrest-core-1.3.jar;%APP_HOME%\lib\jcommon-1.0.23.jar;%APP_HOME%\lib\jfreechart-1.0.19-experimental.jar;%APP_HOME%\lib\jfreechart-1.0.19-swt.jar;%APP_HOME%\lib\jfreechart-1.0.19.jar;%APP_HOME%\lib\jfreesvg-2.0.jar;%APP_HOME%\lib\junit-4.11.jar;%APP_HOME%\lib\orsoncharts-1.4-eval-nofx.jar;%APP_HOME%\lib\orsonpdf-1.6-eval.jar;%APP_HOME%\lib\servlet.jar;%APP_HOME%\lib\swtgraphics2d.jar
 
 
 @rem Execute Symulator_Sesji
