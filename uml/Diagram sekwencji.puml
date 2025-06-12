@@ -1,42 +1,22 @@
 @startuml
-actor User
-participant "Main" as Main
-participant "Reader" as R
-participant "Student" as S
-participant "Plan" as P
-participant "SubjectSorter" as SS
-participant "Subject" as Subj
-participant "StudyEvent" as SE
-participant "Motivator" as M
-participant "Visualizer" as V
+actor Użytkownik
 
-User -> Main : uruchamia program
+Użytkownik -> Reader : wprowadza dane (przedmioty, dni, tryb)
+Reader -> Student : tworzy Student(name, subjects, mode, days)
+Student -> Plan : generuje Plan(days, subjects, mode)
+Student -> Visualizer : setVisualizer(visualizer)
 
-Main -> R : readStudent(path)
-R --> Main : Student
-Main -> S : setVisualizer(V)
-Main -> S : setPlan(P)
-
-User -> S : rozpocznij naukę
-
-S -> SS : sortSubjects(subjects)
-SS --> S : sortedSubjects
-
-S -> P : getDailyPlan(day)
-P --> S : Map<Subject, Integer>
-
-loop dla każdego przedmiotu
-    S -> Subj : study(hours)
-    S -> SE : add to history
+loop dla każdego dnia (day=1..days)
+    loop dla każdego przedmiotu w planie tego dnia
+        Student -> Subject : study(hours)
+        Subject -> Subject : zwiększ studiedTime
+        Student -> StudyEvent : dodaje StudyEvent(subject, hours, day, motivation)
+        Student -> Visualizer : updateGraph(subject, hours, day)
+    end
 end
 
-S -> M : applyMotivator()
-M --> S : adjustMotivation()
-
-S -> V : visualizeProgress(this)
-V --> S
-
-note right of S
-Dzień zakończony
-end note
+Student -> ExamResult : takeExams(subjects)
+ExamResult -> Subject : getProgress()
+ExamResult -> Student : zwraca wynik egzaminu
+Student -> Visualizer : updateResults(wynik)
 @enduml
